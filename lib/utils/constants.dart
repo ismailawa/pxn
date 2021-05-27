@@ -35,6 +35,21 @@ var kLargeTitleStyle = TextStyle(
   fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
   decoration: TextDecoration.none,
 );
+
+var kLargeTitleStyle3 = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryLabelColor,
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  decoration: TextDecoration.none,
+);
+var kLargeTitleStyle2 = TextStyle(
+  fontSize: 28.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  decoration: TextDecoration.none,
+);
 var kTitle1Style = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.bold,
@@ -63,12 +78,26 @@ var kHeadlineLabelStyle = TextStyle(
   fontFamily: 'SF Pro Text',
   decoration: TextDecoration.none,
 );
+var kHeadlineLabelStyle2 = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.w800,
+  color: Colors.white,
+  fontFamily: 'SF Pro Text',
+  decoration: TextDecoration.none,
+);
 var kSubtitleStyle = TextStyle(
   fontSize: 16.0,
   color: kSecondaryLabelColor,
   fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
   decoration: TextDecoration.none,
 );
+var kSubtitleStyle3 = TextStyle(
+  fontSize: 20.0,
+  color: Colors.white,
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  decoration: TextDecoration.none,
+);
+
 var kSubtitleStyle2 = TextStyle(
   fontSize: 16.0,
   color: Colors.deepOrange,

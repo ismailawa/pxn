@@ -59,7 +59,7 @@ class RegistrationController extends GetxController {
       Get.snackbar("Registration",
           "You have sucessfully Register Token has been send to your email");
       Future.delayed(Duration(seconds: 3), () {
-        Get.offAndToNamed('/dashboard');
+        Get.offAndToNamed('/verification');
       });
     } catch (error) {
       Get.back();

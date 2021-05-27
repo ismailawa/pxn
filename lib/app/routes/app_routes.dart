@@ -7,6 +7,11 @@ abstract class Routes {
   static const FORGOTPASSWORD = _Paths.FORGOTPASSWORD;
   static const ONBOARDING = _Paths.ONBOARDING;
   static const DASHBOARD = _Paths.DASHBOARD;
+  static const VERIFICATION = _Paths.VERIFICATION;
+  static const HOME = _Paths.HOME;
+  static const TRANSACTIONS = _Paths.TRANSACTIONS;
+  static const SERVICES = _Paths.SERVICES;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -15,4 +20,9 @@ abstract class _Paths {
   static const FORGOTPASSWORD = '/forgotpassword';
   static const ONBOARDING = '/onboarding';
   static const DASHBOARD = '/dashboard';
+  static const VERIFICATION = '/verification';
+  static const HOME = '/home';
+  static const TRANSACTIONS = '/transactions';
+  static const SERVICES = '/services';
+  static const PROFILE = '/profile';
 }

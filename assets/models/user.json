@@ -1,0 +1,19 @@
+{
+    "id": 11,
+    "firstname": "Ismailawa",
+    "lastname": "Aliyu",
+    "fullname": "Ismailawa Aliyu",
+    "username": "ismailawa",
+    "email": "ismailawa.aliyu@gmail.com",
+    "phone": "+2349086467775",
+    "role": "admin",
+    "password": "$2a$08$ZEdvSPdm2y48iXguXXpPxeEpbN91vyEGHC2XDPzjFA7mxhr5nfTr2",
+    "isPhoneVerified": true,
+    "isBvnVerified": false,
+    "phoneVerificationOtp": null,
+    "otpExpires": null,
+    "passwordResetToken": null,
+    "tokenExpiresIn": null,
+    "createdAt": "2021-04-15T21:37:15.000Z",
+    "updatedAt": "2021-04-16T06:01:21.000Z"
+}

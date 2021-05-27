@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 class LoginController extends GetxController {
   final AuthProvider authProvider;
-
+  final localStorage = GetStorage();
   TextEditingController username;
   TextEditingController password;
   RxBool isSubmited = false.obs;
@@ -29,7 +30,7 @@ class LoginController extends GetxController {
     try {
       isSubmited(true);
       Get.defaultDialog(
-          title: "Autheticating",
+          title: "Authenticating",
           content: Column(
             children: [
               CircularProgressIndicator.adaptive(
@@ -38,9 +39,11 @@ class LoginController extends GetxController {
             ],
           ));
       final result = await authProvider.login(username.text, password.text);
+      localStorage.write("isLogin", true);
+      localStorage.write('user', result);
       Get.back();
       Get.snackbar("Login", "You have sucessfully login");
-      Future.delayed(Duration(seconds: 5), () {
+      Future.delayed(Duration(seconds: 3), () {
         Get.offAndToNamed('/dashboard');
         isSubmited(false);
       });

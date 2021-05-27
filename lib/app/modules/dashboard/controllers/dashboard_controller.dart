@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class DashboardController extends GetxController {
-  //TODO: Implement DashboardController
+  final localStorage = GetStorage();
 
-  final count = 0.obs;
+  
   @override
   void onInit() {
     super.onInit();
+    printInfo(info: localStorage.read('user'));
   }
+
+
 
   @override
   void onReady() {
@@ -16,5 +20,4 @@ class DashboardController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }
