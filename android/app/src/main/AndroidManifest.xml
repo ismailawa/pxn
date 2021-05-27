@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ixnoteservices.pxn_mobile">
+      <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="pxn_mobile"
         android:icon="@mipmap/ic_launcher">
