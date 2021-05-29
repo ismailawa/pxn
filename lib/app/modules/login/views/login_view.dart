@@ -18,7 +18,7 @@ class LoginView extends GetView<LoginController> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 SizedBox(
-                  height: 100,
+                  height: MediaQuery.of(context).size.height * 0.2,
                 ),
                 Logo(),
                 Padding(

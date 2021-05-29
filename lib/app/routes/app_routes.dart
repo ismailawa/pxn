@@ -12,6 +12,11 @@ abstract class Routes {
   static const TRANSACTIONS = _Paths.TRANSACTIONS;
   static const SERVICES = _Paths.SERVICES;
   static const PROFILE = _Paths.PROFILE;
+  static const UTILITIES = _Paths.UTILITIES;
+  static const TRANSFERS = _Paths.TRANSFERS;
+  static const CARBY = _Paths.CARBY;
+  static const ECOMMERCE = _Paths.ECOMMERCE;
+  static const ECURRENCY = _Paths.ECURRENCY;
 }
 
 abstract class _Paths {
@@ -25,4 +30,9 @@ abstract class _Paths {
   static const TRANSACTIONS = '/transactions';
   static const SERVICES = '/services';
   static const PROFILE = '/profile';
+  static const UTILITIES = '/utilities';
+  static const TRANSFERS = '/transfers';
+  static const CARBY = '/carby';
+  static const ECOMMERCE = '/ecommerce';
+  static const ECURRENCY = '/ecurrency';
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pxn_mobile/app/modules/components/sections_header.dart';
 import 'package:pxn_mobile/app/modules/home/components/services_list_section.dart';
 import 'package:pxn_mobile/app/modules/home/components/transaction_list_section.dart';
 import 'package:pxn_mobile/app/modules/home/components/wallet_card.dart';
+import 'package:pxn_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
-import '../controllers/home_controller.dart';
-
-class HomeView extends GetView<HomeController> {
+class HomeView extends StatelessWidget {
+  final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,37 +46,14 @@ class HomeView extends GetView<HomeController> {
                   SizedBox(
                     height: 20,
                   ),
-                  TransactionListSection()
+                  TransactionListSection(
+                    controller: controller,
+                  )
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class HeaderSection extends StatelessWidget {
-  const HeaderSection({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          CircleAvatar(
-            child: Icon(Icons.person),
-          ),
-          Spacer(),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {},
-          )
-        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/home/components/service_card.dart';
 
 class ServiceListSection extends StatelessWidget {
@@ -17,27 +18,37 @@ class ServiceListSection extends StatelessWidget {
               width: 20,
             ),
             ServicesCard(
-              onCardPress: () {},
+              onCardPress: () {
+                Get.toNamed('/utilities');
+              },
               title: 'Utilities',
               imageUrl: 'assets/images/utilities.svg',
             ),
             ServicesCard(
-              onCardPress: () {},
+              onCardPress: () {
+                Get.toNamed('/transfers');
+              },
               title: 'Transfers',
               imageUrl: 'assets/images/transfer.svg',
             ),
             ServicesCard(
-              onCardPress: () {},
+              onCardPress: () {
+                Get.toNamed('/carby');
+              },
               title: 'Carby',
               imageUrl: 'assets/images/carby.svg',
             ),
             ServicesCard(
-              onCardPress: () {},
+              onCardPress: () {
+                Get.toNamed('/ecommerce');
+              },
               title: 'Ecommerce',
               imageUrl: 'assets/images/ecommerce.svg',
             ),
             ServicesCard(
-              onCardPress: () {},
+              onCardPress: () {
+                Get.toNamed('/ecurrency');
+              },
               title: 'ECurrency',
               imageUrl: 'assets/images/ecurrency.svg',
             ),

@@ -1,7 +1,13 @@
 import 'package:get/get.dart';
 
+import 'package:pxn_mobile/app/modules/carby/bindings/carby_binding.dart';
+import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
 import 'package:pxn_mobile/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:pxn_mobile/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/bindings/ecommerce_binding.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/views/ecommerce_view.dart';
+import 'package:pxn_mobile/app/modules/ecurrency/bindings/ecurrency_binding.dart';
+import 'package:pxn_mobile/app/modules/ecurrency/views/ecurrency_view.dart';
 import 'package:pxn_mobile/app/modules/forgotpassword/bindings/forgotpassword_binding.dart';
 import 'package:pxn_mobile/app/modules/forgotpassword/views/forgotpassword_view.dart';
 import 'package:pxn_mobile/app/modules/home/bindings/home_binding.dart';
@@ -18,6 +24,10 @@ import 'package:pxn_mobile/app/modules/services/bindings/services_binding.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
 import 'package:pxn_mobile/app/modules/transactions/bindings/transactions_binding.dart';
 import 'package:pxn_mobile/app/modules/transactions/views/transactions_view.dart';
+import 'package:pxn_mobile/app/modules/transfers/bindings/transfers_binding.dart';
+import 'package:pxn_mobile/app/modules/transfers/views/transfers_view.dart';
+import 'package:pxn_mobile/app/modules/utilities/bindings/utilities_binding.dart';
+import 'package:pxn_mobile/app/modules/utilities/views/utilities_view.dart';
 import 'package:pxn_mobile/app/modules/verification/bindings/verification_binding.dart';
 import 'package:pxn_mobile/app/modules/verification/views/verification_view.dart';
 
@@ -77,6 +87,31 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.UTILITIES,
+      page: () => UtilitiesView(),
+      binding: UtilitiesBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSFERS,
+      page: () => TransfersView(),
+      binding: TransfersBinding(),
+    ),
+    GetPage(
+      name: _Paths.CARBY,
+      page: () => CarbyView(),
+      binding: CarbyBinding(),
+    ),
+    GetPage(
+      name: _Paths.ECOMMERCE,
+      page: () => EcommerceView(),
+      binding: EcommerceBinding(),
+    ),
+    GetPage(
+      name: _Paths.ECURRENCY,
+      page: () => EcurrencyView(),
+      binding: EcurrencyBinding(),
     ),
   ];
 }

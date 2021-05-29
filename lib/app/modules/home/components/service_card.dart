@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pxn_mobile/utils/constants.dart';
@@ -21,7 +20,7 @@ class ServicesCard extends StatelessWidget {
       padding: EdgeInsets.only(right: 20, top: 20, bottom: 25),
       child: Container(
         height: 100,
-        width: 100,
+        width: 110,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
