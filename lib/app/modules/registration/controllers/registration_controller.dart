@@ -8,6 +8,9 @@ class RegistrationController extends GetxController {
   // Injected Properties
   final AuthProvider authProvider;
 
+  // Formstate globalkey
+  GlobalKey<FormState> registrationFormkey = GlobalKey<FormState>();
+
   // Public properties
   TextEditingController firstNameCtrl;
   TextEditingController lastNameCtrl;
@@ -35,6 +38,13 @@ class RegistrationController extends GetxController {
   }
 
   Future<dynamic> register() async {
+    // Form validation
+    final isValid = registrationFormkey.currentState.validate();
+
+    if (!isValid) {
+      return;
+    }
+
     final user = UserRegDto(
         firstName: firstNameCtrl.text,
         lastName: lastNameCtrl.text,
@@ -65,6 +75,48 @@ class RegistrationController extends GetxController {
       Get.back();
       Get.snackbar("Registration Error ", "Resgitration failed $error");
     }
+  }
+
+  String validateFirstName(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
+  }
+
+  String validateLastName(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
+  }
+
+  String validateUsername(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
+  }
+
+  String validatePhone(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
+  }
+
+  String validateEmail(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
+  }
+
+  String validatePassword(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+    return null;
   }
 
   @override

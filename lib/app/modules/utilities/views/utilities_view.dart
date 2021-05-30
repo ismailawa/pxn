@@ -22,7 +22,51 @@ class UtilitiesView extends GetView<UtilitiesController> {
                   children: [
                     ServicesHeader(
                       title: 'Utilities',
+                      child: IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {},
+                      ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 16,
+                        left: 16,
+                        right: 16,
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 200,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Hero(
+                                tag: "Utilities",
+                                child: SvgPicture.asset(
+                                  'assets/images/utilities.svg',
+                                  semanticsLabel: "",
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

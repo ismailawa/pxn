@@ -6,6 +6,7 @@ class CustomInput extends StatelessWidget {
   final bool isPassword;
   final bool isTogglePassword;
   final Function(bool) togglePassword;
+  final Function(String) validator;
 
   final String hint;
   final IconData icon;
@@ -16,14 +17,15 @@ class CustomInput extends StatelessWidget {
     this.controller,
     this.isPassword = false,
     this.isTogglePassword = false,
-    this.togglePassword,
+    this.togglePassword, this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 16),
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
         controller: controller,
         style: kSearchTextStyle,
         obscureText: isPassword && isTogglePassword,

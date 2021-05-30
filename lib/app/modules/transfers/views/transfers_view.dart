@@ -20,6 +20,8 @@ class TransfersView extends GetView<TransfersController> {
                   children: [
                     ServicesHeader(
                       title: 'Transfers',
+                      child: IconButton(
+                          icon: Icon(Icons.more_vert), onPressed: () {}),
                     ),
                   ],
                 ),

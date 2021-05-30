@@ -3,16 +3,20 @@ import 'package:pxn_mobile/utils/constants.dart';
 
 class ServicesHeader extends StatelessWidget {
   final String title;
+  final Widget child;
   const ServicesHeader({
     Key key,
     this.title,
+    this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16,
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 16,
       ),
       child: Container(
         child: Row(
@@ -23,7 +27,7 @@ class ServicesHeader extends StatelessWidget {
               style: kLargeTitleStyle,
             ),
             Spacer(),
-            IconButton(icon: Icon(Icons.more_vert), onPressed: () {})
+            child != null ? child : SizedBox.shrink(),
           ],
         ),
       ),

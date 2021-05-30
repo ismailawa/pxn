@@ -7,6 +7,7 @@ import 'package:pxn_mobile/utils/constants.dart';
 class LoginController extends GetxController {
   final AuthProvider authProvider;
   final localStorage = GetStorage();
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   TextEditingController username;
   TextEditingController password;
   RxBool isSubmited = false.obs;
@@ -27,6 +28,12 @@ class LoginController extends GetxController {
   }
 
   Future<dynamic> login() async {
+    final isValid = loginFormKey.currentState.validate();
+
+    if (!isValid) {
+      return;
+    }
+
     try {
       isSubmited(true);
       Get.defaultDialog(
@@ -51,6 +58,20 @@ class LoginController extends GetxController {
       Get.back();
       Get.snackbar("Login Error ", "Login failed $e");
     }
+  }
+
+  String validateUsername(String value) {
+    if (value.isEmpty) {
+      return 'Username is required';
+    }
+    return null;
+  }
+
+  String validatePassword(String value) {
+    if (value.isEmpty) {
+      return 'Password is required';
+    }
+    return null;
   }
 
   @override

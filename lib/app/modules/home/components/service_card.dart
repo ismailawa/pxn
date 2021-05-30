@@ -42,10 +42,13 @@ class ServicesCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: SvgPicture.asset(
-                        imageUrl,
-                        semanticsLabel: title,
-                        fit: BoxFit.contain,
+                      child: Hero(
+                        tag: title,
+                        child: SvgPicture.asset(
+                          imageUrl,
+                          semanticsLabel: title,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     Text(
