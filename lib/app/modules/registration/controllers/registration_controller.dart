@@ -46,8 +46,8 @@ class RegistrationController extends GetxController {
     }
 
     final user = UserRegDto(
-        firstName: firstNameCtrl.text,
-        lastName: lastNameCtrl.text,
+        firstname: firstNameCtrl.text,
+        lastname: lastNameCtrl.text,
         username: usernameCtrl.text,
         phone: phoneCtrl.text,
         email: emailCtrl.text,
@@ -69,7 +69,7 @@ class RegistrationController extends GetxController {
       Get.snackbar("Registration",
           "You have sucessfully Register Token has been send to your email");
       Future.delayed(Duration(seconds: 3), () {
-        Get.offAndToNamed('/verification');
+        Get.offAndToNamed('/verification', arguments: {'username': user.username});
       });
     } catch (error) {
       Get.back();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
-import 'package:pxn_mobile/utils/constants.dart';
+import 'package:pxn_mobile/utils/helpers.dart';
 
 class LoginController extends GetxController {
   final AuthProvider authProvider;
@@ -36,18 +36,11 @@ class LoginController extends GetxController {
 
     try {
       isSubmited(true);
-      Get.defaultDialog(
-          title: "Authenticating",
-          content: Column(
-            children: [
-              CircularProgressIndicator.adaptive(
-                backgroundColor: pxnPrimaryColor,
-              ),
-            ],
-          ));
+      loadingView("Authenticating");
+
       final result = await authProvider.login(username.text, password.text);
       localStorage.write("isLogin", true);
-      localStorage.write('user', result);
+      localStorage.write('user', result['data']);
       Get.back();
       Get.snackbar("Login", "You have sucessfully login");
       Future.delayed(Duration(seconds: 3), () {
@@ -81,21 +74,21 @@ class LoginController extends GetxController {
   }
 }
 
-class LoadingView extends StatelessWidget {
-  const LoadingView({
-    Key key,
-  }) : super(key: key);
+// class LoadingView extends StatelessWidget {
+//   const LoadingView({
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-      ),
-      child: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 200,
+//       width: 200,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(20),
+//         color: Colors.white,
+//       ),
+//       child: Center(child: CircularProgressIndicator()),
+//     );
+//   }
+// }

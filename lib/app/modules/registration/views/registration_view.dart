@@ -127,7 +127,7 @@ class RegistrationView extends GetView<RegistrationController> {
                                     width: 10,
                                   ),
                                   Text(
-                                    "Login",
+                                    "Login.",
                                     style: kSubtitleStyle2,
                                   ),
                                 ],

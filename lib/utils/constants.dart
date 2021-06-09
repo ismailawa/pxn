@@ -15,6 +15,8 @@ const animationDuration = Duration(microseconds: 200);
 const base_url = 'https://pxn-backend.herokuapp.com/api/v1';
 const login_url = '/auth/login';
 const register_url = '/auth/register';
+const verify_url = '/auth/otp/verify';
+const resendtoken_url = '/auth/otp/resend';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);

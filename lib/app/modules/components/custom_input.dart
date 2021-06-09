@@ -7,6 +7,7 @@ class CustomInput extends StatelessWidget {
   final bool isTogglePassword;
   final Function(bool) togglePassword;
   final Function(String) validator;
+  final TextInputType inputType;
 
   final String hint;
   final IconData icon;
@@ -17,7 +18,9 @@ class CustomInput extends StatelessWidget {
     this.controller,
     this.isPassword = false,
     this.isTogglePassword = false,
-    this.togglePassword, this.validator,
+    this.togglePassword,
+    this.validator,
+    this.inputType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,7 @@ class CustomInput extends StatelessWidget {
       child: TextFormField(
         validator: validator,
         controller: controller,
+        keyboardType: inputType,
         style: kSearchTextStyle,
         obscureText: isPassword && isTogglePassword,
         obscuringCharacter: '*',

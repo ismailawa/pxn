@@ -34,7 +34,7 @@ import 'package:pxn_mobile/app/modules/verification/views/verification_view.dart
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.ONBOARDING;
 
   static final routes = [
     GetPage(

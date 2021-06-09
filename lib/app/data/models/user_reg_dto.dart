@@ -1,6 +1,6 @@
 class UserRegDto {
-  final String firstName;
-  final String lastName;
+  final String firstname;
+  final String lastname;
   final String username;
   final String phone;
   final String email;
@@ -8,8 +8,8 @@ class UserRegDto {
   final String role;
 
   UserRegDto(
-      {this.firstName,
-      this.lastName,
+      {this.firstname,
+      this.lastname,
       this.username,
       this.phone,
       this.email,
@@ -17,8 +17,8 @@ class UserRegDto {
       this.role});
 
   factory UserRegDto.fromJson(Map<String, dynamic> json) => UserRegDto(
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      firstname: json['firstname'],
+      lastname: json['lastname'],
       username: json['username'],
       phone: json['phone'],
       email: json['email'],
@@ -26,8 +26,8 @@ class UserRegDto {
       role: json['role']);
 
   Map<String, dynamic> toMap() => {
-        'fisrtName': firstName,
-        'lastName': lastName,
+        'firstname': firstname,
+        'lastname': lastname,
         'username': username,
         'phone': phone,
         'email': email,

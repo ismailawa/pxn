@@ -1,10 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OnboardingController extends GetxController {
-  final count = 0.obs;
+ var pageController = PageController().obs;
+  var initialPage = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
+    pageController.value.addListener(() {
+      initialPage(pageController.value.page.round());
+    });
   }
 
   @override
@@ -14,5 +20,4 @@ class OnboardingController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }
