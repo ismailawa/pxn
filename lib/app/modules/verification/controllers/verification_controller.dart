@@ -6,13 +6,13 @@ import 'package:pxn_mobile/utils/helpers.dart';
 
 class VerificationController extends GetxController {
   var user = Get.arguments;
-  final AuthProvider authProvider;
+  AuthProvider authProvider = Get.find<AuthProvider>();
   final localStorage = GetStorage();
 
   GlobalKey<FormState> verificationFormKey = GlobalKey<FormState>();
   TextEditingController tokenCtrl;
 
-  VerificationController(this.authProvider);
+  VerificationController();
 
   @override
   void onInit() {

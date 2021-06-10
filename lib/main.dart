@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pxn_mobile/app/data/services/storage_services.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
+import 'app/data/providers/auth_provider.dart';
 import 'app/modules/login/bindings/login_binding.dart';
 import 'app/routes/app_pages.dart';
 
@@ -32,7 +33,9 @@ class Pxn extends StatelessWidget {
             bodyText2: TextStyle(color: Colors.black45),
           )),
       title: "Application",
-      initialBinding: LoginBinding(),
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthProvider(), permanent: true);
+      }),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     );

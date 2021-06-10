@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 class CustomInput extends StatelessWidget {
@@ -8,6 +9,7 @@ class CustomInput extends StatelessWidget {
   final Function(bool) togglePassword;
   final Function(String) validator;
   final TextInputType inputType;
+  final List<TextInputFormatter> formater;
 
   final String hint;
   final IconData icon;
@@ -21,6 +23,7 @@ class CustomInput extends StatelessWidget {
     this.togglePassword,
     this.validator,
     this.inputType = TextInputType.text,
+    this.formater,
   }) : super(key: key);
 
   @override
@@ -28,6 +31,7 @@ class CustomInput extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 16),
       child: TextFormField(
+        inputFormatters: formater,
         validator: validator,
         controller: controller,
         keyboardType: inputType,

@@ -22,6 +22,8 @@ import 'package:pxn_mobile/app/modules/registration/bindings/registration_bindin
 import 'package:pxn_mobile/app/modules/registration/views/registration_view.dart';
 import 'package:pxn_mobile/app/modules/services/bindings/services_binding.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
+import 'package:pxn_mobile/app/modules/settings/bindings/settings_binding.dart';
+import 'package:pxn_mobile/app/modules/settings/views/settings_view.dart';
 import 'package:pxn_mobile/app/modules/transactions/bindings/transactions_binding.dart';
 import 'package:pxn_mobile/app/modules/transactions/views/transactions_view.dart';
 import 'package:pxn_mobile/app/modules/transfers/bindings/transfers_binding.dart';
@@ -112,6 +114,11 @@ class AppPages {
       name: _Paths.ECURRENCY,
       page: () => EcurrencyView(),
       binding: EcurrencyBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => SettingsView(),
+      binding: SettingsBinding(),
     ),
   ];
 }

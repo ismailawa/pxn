@@ -4,10 +4,13 @@ import 'package:pxn_mobile/utils/constants.dart';
 class ServicesHeader extends StatelessWidget {
   final String title;
   final Widget child;
+  final Function onPress;
+
   const ServicesHeader({
     Key key,
     this.title,
     this.child,
+    this.onPress,
   }) : super(key: key);
 
   @override

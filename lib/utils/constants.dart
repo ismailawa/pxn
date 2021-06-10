@@ -17,6 +17,7 @@ const login_url = '/auth/login';
 const register_url = '/auth/register';
 const verify_url = '/auth/otp/verify';
 const resendtoken_url = '/auth/otp/resend';
+const user_profile_url = '/user-mgt';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);
@@ -139,8 +140,9 @@ var kSearchPlaceholderStyle = TextStyle(
   decoration: TextDecoration.none,
 );
 var kSearchTextStyle = TextStyle(
-  fontSize: 13.0,
+  fontSize: 18.0,
   color: kPrimaryLabelColor,
+  fontWeight: FontWeight.w600,
   fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
   decoration: TextDecoration.none,
 );

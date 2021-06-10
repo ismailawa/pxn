@@ -1,15 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:pxn_mobile/app/modules/home/components/topup_btn.dart';
+import 'package:pxn_mobile/app/modules/login/user_model.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 class WalletCard extends StatelessWidget {
+  final User user;
   final Function topupWallet;
 
-  const WalletCard({
-    Key key,
-    this.topupWallet,
-  }) : super(key: key);
+  const WalletCard({Key key, this.topupWallet, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class WalletCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Ismailawa Aliyu",
+                  user.fullname,
                   style: kHeadlineLabelStyle2,
                 ),
                 TopupBtn(
@@ -54,7 +52,7 @@ class WalletCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "09086467775",
+                  user.phone,
                   style: kSubtitleStyle3,
                 ),
               ],
@@ -63,7 +61,7 @@ class WalletCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '₦ 127,677.23',
+                  '₦ ${user.wallet.balance}',
                   style: kLargeTitleStyle2,
                 ),
               ],

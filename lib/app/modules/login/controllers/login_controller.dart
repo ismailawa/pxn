@@ -5,15 +5,13 @@ import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
 import 'package:pxn_mobile/utils/helpers.dart';
 
 class LoginController extends GetxController {
-  final AuthProvider authProvider;
+  AuthProvider authProvider = Get.find<AuthProvider>();
   final localStorage = GetStorage();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   TextEditingController username;
   TextEditingController password;
   RxBool isSubmited = false.obs;
   RxBool togglePassword = false.obs;
-
-  LoginController(this.authProvider);
 
   @override
   void onInit() {
@@ -41,6 +39,7 @@ class LoginController extends GetxController {
       final result = await authProvider.login(username.text, password.text);
       localStorage.write("isLogin", true);
       localStorage.write('user', result['data']);
+      localStorage.write('token', result['data']['token']);
       Get.back();
       Get.snackbar("Login", "You have sucessfully login");
       Future.delayed(Duration(seconds: 3), () {

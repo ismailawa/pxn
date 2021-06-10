@@ -1,3 +1,5 @@
+import 'package:pxn_mobile/app/modules/login/wallet.dart';
+
 class User {
   int id;
   String firstname;
@@ -16,45 +18,49 @@ class User {
   dynamic tokenExpiresIn;
   String createdAt;
   String updatedAt;
+  Wallet wallet;
 
-  User(
-      {this.id,
-      this.firstname,
-      this.lastname,
-      this.fullname,
-      this.username,
-      this.email,
-      this.phone,
-      this.role,
-      this.password,
-      this.isPhoneVerified,
-      this.isBvnVerified,
-      this.phoneVerificationOtp,
-      this.otpExpires,
-      this.passwordResetToken,
-      this.tokenExpiresIn,
-      this.createdAt,
-      this.updatedAt});
+  User({
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.fullname,
+    this.username,
+    this.email,
+    this.phone,
+    this.role,
+    this.password,
+    this.isPhoneVerified,
+    this.isBvnVerified,
+    this.phoneVerificationOtp,
+    this.otpExpires,
+    this.passwordResetToken,
+    this.tokenExpiresIn,
+    this.createdAt,
+    this.updatedAt,
+    this.wallet,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id :json['id'],
-    firstname : json['firstname'],
-    lastname : json['lastname'],
-    fullname : json['fullname'],
-    username :json['username'],
-    email : json['email'],
-    phone : json['phone'],
-    role : json['role'],
-    password : json['password'],
-    isPhoneVerified : json['isPhoneVerified'],
-    isBvnVerified : json['isBvnVerified'],
-    phoneVerificationOtp : json['phoneVerificationOtp'],
-    otpExpires : json['otpExpires'],
-    passwordResetToken : json['passwordResetToken'],
-    tokenExpiresIn : json['tokenExpiresIn'],
-    createdAt : json['createdAt'],
-    updatedAt : json['updatedAt'],
-  );
+        id: json['id'],
+        firstname: json['firstname'],
+        lastname: json['lastname'],
+        fullname: json['fullname'],
+        username: json['username'],
+        email: json['email'],
+        phone: json['phone'],
+        role: json['role'],
+        password: json['password'],
+        isPhoneVerified: json['isPhoneVerified'],
+        isBvnVerified: json['isBvnVerified'],
+        phoneVerificationOtp: json['phoneVerificationOtp'],
+        otpExpires: json['otpExpires'],
+        passwordResetToken: json['passwordResetToken'],
+        tokenExpiresIn: json['tokenExpiresIn'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        wallet: Wallet.fromJson(json['Wallet']),
+      );
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -75,6 +81,7 @@ class User {
     data['tokenExpiresIn'] = tokenExpiresIn;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
+    data['wallet'] = wallet.toJson();
     return data;
   }
 }

@@ -17,6 +17,7 @@ abstract class Routes {
   static const CARBY = _Paths.CARBY;
   static const ECOMMERCE = _Paths.ECOMMERCE;
   static const ECURRENCY = _Paths.ECURRENCY;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const CARBY = '/carby';
   static const ECOMMERCE = '/ecommerce';
   static const ECURRENCY = '/ecurrency';
+  static const SETTINGS = '/settings';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
@@ -17,7 +18,9 @@ class HeaderSection extends StatelessWidget {
           Spacer(),
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed('/settings');
+            },
           )
         ],
       ),

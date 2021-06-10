@@ -28,10 +28,13 @@ dependencies:
   flutter_svg: ^0.19.3
   get: ^4.1.4
   get_storage: ^2.0.2
+  # rave_flutter: ^0.0.9-alpha+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
