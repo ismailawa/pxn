@@ -71,12 +71,18 @@ class HomeView extends StatelessWidget {
 }
 
 class CustomDialog extends StatelessWidget {
+  final GlobalKey<FormState> amountFormkey;
+  final Function(String) validator;
   final Function close;
-  final Function makePayment;
+  final Function(BuildContext context) makePayment;
+  final TextEditingController controller;
   const CustomDialog({
     Key key,
     this.close,
     this.makePayment,
+    this.controller,
+    this.amountFormkey,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -87,60 +93,87 @@ class CustomDialog extends StatelessWidget {
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.40,
-        width: MediaQuery.of(context).size.width * 0.85,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Text(
-                "Top Up",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+      child: Form(
+        key: amountFormkey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.40,
+          width: MediaQuery.of(context).size.width * 0.85,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text(
+                  "Fund Your Wallet",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: pxnPrimaryColor,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(),
-              SizedBox(
-                height: 10,
-              ),
-              CustomInput(
-                formater: [ThousandsSeparatorInputFormatter()],
-                icon: Icons.payment,
-                hint: "Enter Amount",
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: SizedBox(
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 10,
+                ),
+                CustomInput(
+                  validator: validator,
+                  inputType: TextInputType.number,
+                  controller: controller,
+                  // formater: [ThousandsSeparatorInputFormatter()],
+                  icon: Icons.payment,
+                  hint: "Enter Amount",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: MaterialButton(
+                      color: pxnSecondaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      onPressed: () {
+                        makePayment(context);
+                      },
+                      child: Text(
+                        'Make Payment',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
                   height: 45,
                   width: double.infinity,
                   child: MaterialButton(
-                    color: pxnSecondaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    onPressed: makePayment,
+                    onPressed: close,
                     child: Text(
-                      'Proceed',
+                      'Cancel',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.white,
                       ),
                     ),
+                    color: pxnPrimaryColor,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(onPressed: close, child: Text('Cancel')),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

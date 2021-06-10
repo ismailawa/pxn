@@ -18,6 +18,8 @@ const register_url = '/auth/register';
 const verify_url = '/auth/otp/verify';
 const resendtoken_url = '/auth/otp/resend';
 const user_profile_url = '/user-mgt';
+const payment_initialisation_url = '/wallet/credit';
+const payment_confirmation_url = '/wallet/confirmation';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);
