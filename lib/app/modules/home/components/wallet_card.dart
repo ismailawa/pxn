@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pxn_mobile/app/modules/home/components/topup_btn.dart';
 import 'package:pxn_mobile/app/modules/login/user_model.dart';
 import 'package:pxn_mobile/utils/constants.dart';
@@ -11,6 +12,9 @@ class WalletCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency =
+        new NumberFormat.currency(locale: "en_US", symbol: "");
+    ;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Container(
@@ -61,7 +65,7 @@ class WalletCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '₦ ${user.wallet.balance}',
+                  '₦ ${formatCurrency.format(user.wallet.balance)}',
                   style: kLargeTitleStyle2,
                 ),
               ],

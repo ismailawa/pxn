@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:pxn_mobile/app/modules/login/transaction_model.dart';
 
 class TransactionCard extends StatelessWidget {
+  final TransactionModel transaction;
   final Function onTap;
 
   const TransactionCard({
     Key key,
     this.onTap,
+    this.transaction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency =
+        new NumberFormat.currency(locale: "en_US", symbol: "");
     return Padding(
       padding: const EdgeInsets.only(bottom: 18),
       child: Material(
@@ -35,9 +41,9 @@ class TransactionCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Transaction Description",
+                          transaction.description,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 16,
                             color: Colors.black87,
                             fontWeight: FontWeight.w700,
                           ),
@@ -45,7 +51,7 @@ class TransactionCard extends StatelessWidget {
                         SizedBox(
                           height: 8,
                         ),
-                        Text("Jan, 21 2021"),
+                        Text("${transaction.date.split('T')[0]}"),
                       ],
                     ),
                   ),
@@ -57,7 +63,7 @@ class TransactionCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      '100,250.00',
+                      '₦ ${formatCurrency.format(transaction.amount)}',
                       style: TextStyle(
                         color: Colors.green.shade900,
                       ),

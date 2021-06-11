@@ -37,9 +37,9 @@ class LoginController extends GetxController {
       loadingView("Authenticating");
 
       final result = await authProvider.login(username.text, password.text);
-      localStorage.write("isLogin", true);
-      localStorage.write('user', result['data']);
-      localStorage.write('token', result['data']['token']);
+      await localStorage.write("isLogin", true);
+      await localStorage.write('user', result['data']);
+      await localStorage.write('token', result['data']['token']);
       Get.back();
       Get.snackbar("Login", "You have sucessfully login");
       Future.delayed(Duration(seconds: 3), () {

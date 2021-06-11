@@ -56,12 +56,11 @@ class HomeController extends GetxController {
       loadingView("Processing...");
       final result = await paymentProvider.initialisePayment(amountCtrl.text);
       if (result['success']) {
+        amountCtrl.clear();
         Get.back();
-        // Get.back();
         final initialRes = FlutterWaveInitResponseModel.fromJson(
             result as Map<String, dynamic>);
-        print(initialRes.data.txtRef);
-        final res = await processPayment(
+        RaveResult res = await processPayment(
             context: context,
             txRef: initialRes.data.txtRef,
             publicKey: initialRes.data.flwpubk,
@@ -71,14 +70,19 @@ class HomeController extends GetxController {
             firstName: user.value.firstname,
             lastName: user.value.lastname,
             narration: "Wallet funding");
-        print(res);
+
+        final confirmationRes = await paymentProvider.confirmPayment(
+            initialRes.data.txtRef, res.rawResponse['data']['id']);
+        if (confirmationRes['success']) {
+          Get.back();
+          await getCurrentUser();
+        }
       }
     } catch (e) {
       print(e);
       Get.back();
       Get.snackbar("Payment Error ", "Wallet funding failed $e");
     }
-    Get.back();
   }
 
   @override
@@ -90,6 +94,7 @@ class HomeController extends GetxController {
     try {
       final result = await authProvider.getUserProfile();
       if (result['success']) {
+        await localStorage.remove('profile');
         await localStorage.write('profile', result['data']);
         final decodedUser =
             User.fromJson(result['data'] as Map<String, dynamic>);
@@ -109,7 +114,7 @@ class HomeController extends GetxController {
     return null;
   }
 
-  Future<dynamic> processPayment({
+  Future<RaveResult> processPayment({
     BuildContext context,
     String publicKey,
     String encryptionKey,

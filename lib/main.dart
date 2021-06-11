@@ -26,7 +26,7 @@ class Pxn extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           accentColor: pxnSecondaryColor,
-          fontFamily: "Lato",
+          fontFamily: "Roboto",
           scaffoldBackgroundColor: Colors.white,
           textTheme: TextTheme(
             bodyText1: TextStyle(color: Colors.black54),

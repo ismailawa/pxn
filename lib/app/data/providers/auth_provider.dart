@@ -9,8 +9,6 @@ class AuthProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = base_url;
-
-    setTokenHeader();
   }
 
   setTokenHeader() {
@@ -45,6 +43,7 @@ class AuthProvider extends GetConnect {
   }
 
   Future<dynamic> getUserProfile() async {
+    setTokenHeader();
     final Response response = await get(user_profile_url);
     if (response.status.hasError) {
       throw Exception(response.statusText);
@@ -54,6 +53,7 @@ class AuthProvider extends GetConnect {
   }
 
   Future<dynamic> verifyToken(String token) async {
+    setTokenHeader();
     final Response response = await post(verify_url, {"otp": int.parse(token)});
     if (response.status.hasError) {
       throw Exception(response.statusText);
@@ -63,6 +63,7 @@ class AuthProvider extends GetConnect {
   }
 
   Future<dynamic> reTokensend(String username) async {
+    setTokenHeader();
     final Response response =
         await post(resendtoken_url, {"username": username});
     if (response.status.hasError) {

@@ -57,6 +57,7 @@ class HomeView extends StatelessWidget {
                             height: 20,
                           ),
                           TransactionListSection(
+                            transactions: controller.user.value.transactions,
                             controller: controller,
                           )
                         ],
@@ -97,8 +98,8 @@ class CustomDialog extends StatelessWidget {
         key: amountFormkey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.40,
-          width: MediaQuery.of(context).size.width * 0.85,
+          height: MediaQuery.of(context).size.height * 0.45,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child: Padding(

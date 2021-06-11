@@ -1,3 +1,4 @@
+import 'package:pxn_mobile/app/modules/login/transaction_model.dart';
 import 'package:pxn_mobile/app/modules/login/wallet.dart';
 
 class User {
@@ -19,6 +20,7 @@ class User {
   String createdAt;
   String updatedAt;
   Wallet wallet;
+  List<TransactionModel> transactions;
 
   User({
     this.id,
@@ -39,6 +41,7 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.wallet,
+    this.transactions,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -60,6 +63,8 @@ class User {
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
         wallet: Wallet.fromJson(json['Wallet']),
+        transactions:
+            TransactionModel.transactionJsonListParser(json['transactions']),
       );
 
   Map<String, dynamic> toJson() {

@@ -37,7 +37,7 @@ var kLargeTitleStyle = TextStyle(
   fontSize: 28.0,
   fontWeight: FontWeight.bold,
   color: kPrimaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 
@@ -45,25 +45,25 @@ var kLargeTitleStyle3 = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.bold,
   color: kPrimaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kLargeTitleStyle2 = TextStyle(
   fontSize: 28.0,
   fontWeight: FontWeight.bold,
   color: Colors.white,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kTitle1Style = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.bold,
   color: kPrimaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kCardTitleStyle = TextStyle(
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   fontWeight: FontWeight.bold,
   color: Colors.white,
   fontSize: 22.0,
@@ -73,7 +73,7 @@ var kTitle2Style = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.bold,
   color: kPrimaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kHeadlineLabelStyle = TextStyle(
@@ -93,13 +93,13 @@ var kHeadlineLabelStyle2 = TextStyle(
 var kSubtitleStyle = TextStyle(
   fontSize: 16.0,
   color: kSecondaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kSubtitleStyle3 = TextStyle(
   fontSize: 20.0,
   color: Colors.white,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 
@@ -107,49 +107,49 @@ var kSubtitleStyle2 = TextStyle(
   fontSize: 16.0,
   color: Colors.deepOrange,
   fontWeight: FontWeight.w600,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kButtonStyle = TextStyle(
   fontSize: 20.0,
   color: Colors.white,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kBodyLabelStyle = TextStyle(
   fontSize: 16.0,
   color: Colors.black,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kCalloutLabelStyle = TextStyle(
   fontSize: 16.0,
   fontWeight: FontWeight.w800,
   color: kPrimaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kSecondaryCalloutLabelStyle = TextStyle(
   fontSize: 16.0,
   color: kSecondaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kSearchPlaceholderStyle = TextStyle(
   fontSize: 13.0,
   color: kSecondaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kSearchTextStyle = TextStyle(
   fontSize: 18.0,
   color: kPrimaryLabelColor,
   fontWeight: FontWeight.w600,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
 var kCardSubtitleStyle = TextStyle(
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   color: Color(0xE6FFFFFF),
   fontSize: 13.0,
   decoration: TextDecoration.none,
@@ -157,6 +157,6 @@ var kCardSubtitleStyle = TextStyle(
 var kCaptionLabelStyle = TextStyle(
   fontSize: 12.0,
   color: kSecondaryLabelColor,
-  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Lato',
+  fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );

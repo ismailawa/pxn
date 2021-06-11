@@ -66,7 +66,7 @@ class UtilitiesGridContainerSection extends StatelessWidget {
       color: Colors.transparent,
       width: MediaQuery.of(context).size.width,
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.26,
+        maxHeight: MediaQuery.of(context).size.height * 0.30,
       ),
       child: GridView.builder(
           physics: ClampingScrollPhysics(),
