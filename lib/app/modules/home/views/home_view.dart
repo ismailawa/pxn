@@ -43,11 +43,11 @@ class HomeView extends StatelessWidget {
                               controller.openPaymentDialog(context);
                             },
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Label(
                             title: "Services",
-                          ),
-                          SizedBox(
-                            height: 16,
                           ),
                           ServiceListSection(),
                           Label(
@@ -111,7 +111,7 @@ class CustomDialog extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: pxnPrimaryColor,
+                    color: Colors.blueAccent,
                   ),
                 ),
                 SizedBox(
@@ -135,7 +135,7 @@ class CustomDialog extends StatelessWidget {
                     height: 45,
                     width: double.infinity,
                     child: MaterialButton(
-                      color: pxnSecondaryColor,
+                      color: Colors.blueAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -170,7 +170,7 @@ class CustomDialog extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    color: pxnPrimaryColor,
+                    color: Colors.pinkAccent,
                   ),
                 ),
               ],

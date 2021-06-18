@@ -1,7 +1,13 @@
 import 'package:get/get.dart';
 
+import 'package:pxn_mobile/app/modules/airtime/bindings/airtime_binding.dart';
+import 'package:pxn_mobile/app/modules/airtime/views/airtime_view.dart';
 import 'package:pxn_mobile/app/modules/carby/bindings/carby_binding.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
+import 'package:pxn_mobile/app/modules/cart/bindings/cart_binding.dart';
+import 'package:pxn_mobile/app/modules/cart/views/cart_view.dart';
+import 'package:pxn_mobile/app/modules/customBottomSheet/bindings/custom_bottom_sheet_binding.dart';
+import 'package:pxn_mobile/app/modules/customBottomSheet/views/custom_bottom_sheet_view.dart';
 import 'package:pxn_mobile/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:pxn_mobile/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:pxn_mobile/app/modules/ecommerce/bindings/ecommerce_binding.dart';
@@ -16,6 +22,8 @@ import 'package:pxn_mobile/app/modules/login/bindings/login_binding.dart';
 import 'package:pxn_mobile/app/modules/login/views/login_view.dart';
 import 'package:pxn_mobile/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:pxn_mobile/app/modules/onboarding/views/onboarding_view.dart';
+import 'package:pxn_mobile/app/modules/productDetails/bindings/product_details_binding.dart';
+import 'package:pxn_mobile/app/modules/productDetails/views/product_details_view.dart';
 import 'package:pxn_mobile/app/modules/profile/bindings/profile_binding.dart';
 import 'package:pxn_mobile/app/modules/profile/views/profile_view.dart';
 import 'package:pxn_mobile/app/modules/registration/bindings/registration_binding.dart';
@@ -119,6 +127,26 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.AIRTIME,
+      page: () => AirtimeView(),
+      binding: AirtimeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUSTOM_BOTTOM_SHEET,
+      page: () => CustomBottomSheetView(),
+      binding: CustomBottomSheetBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_DETAILS,
+      page: () => ProductDetailsView(),
+      binding: ProductDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART,
+      page: () => CartView(),
+      binding: CartBinding(),
     ),
   ];
 }

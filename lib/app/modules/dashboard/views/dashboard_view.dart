@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/components/custom_nav_bar.dart';
 import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/profile/views/profile_view.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
 import 'package:pxn_mobile/app/modules/transactions/views/transactions_view.dart';
-
-import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends StatefulWidget {
   DashboardView({Key key}) : super(key: key);

@@ -18,6 +18,10 @@ abstract class Routes {
   static const ECOMMERCE = _Paths.ECOMMERCE;
   static const ECURRENCY = _Paths.ECURRENCY;
   static const SETTINGS = _Paths.SETTINGS;
+  static const AIRTIME = _Paths.AIRTIME;
+  static const CUSTOM_BOTTOM_SHEET = _Paths.CUSTOM_BOTTOM_SHEET;
+  static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
+  static const CART = _Paths.CART;
 }
 
 abstract class _Paths {
@@ -37,4 +41,8 @@ abstract class _Paths {
   static const ECOMMERCE = '/ecommerce';
   static const ECURRENCY = '/ecurrency';
   static const SETTINGS = '/settings';
+  static const AIRTIME = '/airtime';
+  static const CUSTOM_BOTTOM_SHEET = '/custom-bottom-sheet';
+  static const PRODUCT_DETAILS = '/product-details';
+  static const CART = '/cart';
 }

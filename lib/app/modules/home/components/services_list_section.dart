@@ -35,7 +35,7 @@ class ServiceListSection extends StatelessWidget {
               onCardPress: () {
                 Get.toNamed('/carby');
               },
-              title: 'Carby',
+              title: 'Caby',
               imageUrl: 'assets/images/carby.svg',
             ),
             ServicesCard(

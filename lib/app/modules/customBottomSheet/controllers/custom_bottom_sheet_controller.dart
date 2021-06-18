@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-class EcurrencyController extends GetxController {
+class CustomBottomSheetController extends GetxController {
+  //TODO: Implement CustomBottomSheetController
+
   final count = 0.obs;
   @override
   void onInit() {

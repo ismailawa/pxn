@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-class EcurrencyController extends GetxController {
+class ProductDetailsController extends GetxController {
+  //TODO: Implement ProductDetailsController
+
   final count = 0.obs;
   @override
   void onInit() {

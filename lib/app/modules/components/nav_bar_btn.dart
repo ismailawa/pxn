@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pxn_mobile/utils/constants.dart';
 
 class NavBtn extends StatelessWidget {
   final bool isSelected;
@@ -27,8 +26,8 @@ class NavBtn extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   gradient: LinearGradient(colors: [
-                    Colors.blueGrey.withOpacity(0.9),
-                    pxnSecondaryColor,
+                    Colors.pink.withOpacity(0.9),
+                    Colors.blueAccent,
                   ]),
                 ),
                 child: Padding(

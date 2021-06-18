@@ -64,12 +64,13 @@ class RegistrationController extends GetxController {
               ),
             ],
           ));
-      final result = await authProvider.register(user);
+      await authProvider.register(user);
       Get.back();
       Get.snackbar("Registration",
           "You have sucessfully Register Token has been send to your email");
       Future.delayed(Duration(seconds: 3), () {
-        Get.offAndToNamed('/verification', arguments: {'username': user.username});
+        Get.offAndToNamed('/verification',
+            arguments: {'username': user.username});
       });
     } catch (error) {
       Get.back();

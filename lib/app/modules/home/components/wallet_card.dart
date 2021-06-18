@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pxn_mobile/app/modules/home/components/topup_btn.dart';
@@ -14,18 +16,17 @@ class WalletCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatCurrency =
         new NumberFormat.currency(locale: "en_US", symbol: "");
-    ;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        padding: EdgeInsets.all(16),
+        // padding: EdgeInsets.all(16),
         constraints: BoxConstraints(
           maxHeight: 200,
         ),
         width: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/cardbg.png'), fit: BoxFit.cover),
+          // image: DecorationImage(
+          //     image: AssetImage('assets/images/card2.jpeg'), fit: BoxFit.cover),
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
@@ -36,39 +37,57 @@ class WalletCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  user.fullname,
-                  style: kHeadlineLabelStyle2,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaY: 4, sigmaX: 4),
+                child: Image.asset(
+                  'assets/images/card2.jpeg',
+                  fit: BoxFit.cover,
                 ),
-                TopupBtn(
-                  onTop: topupWallet,
-                )
-              ],
+              ),
             ),
-            SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                Text(
-                  user.phone,
-                  style: kSubtitleStyle3,
-                ),
-              ],
-            ),
-            Expanded(child: Container()),
-            Row(
-              children: [
-                Text(
-                  '₦ ${formatCurrency.format(user.wallet.balance)}',
-                  style: kLargeTitleStyle2,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        user.fullname,
+                        style: kHeadlineLabelStyle2,
+                      ),
+                      TopupBtn(
+                        onTop: topupWallet,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        user.phone,
+                        style: kSubtitleStyle3,
+                      ),
+                    ],
+                  ),
+                  Expanded(child: Container()),
+                  Row(
+                    children: [
+                      Text(
+                        '₦ ${formatCurrency.format(user.wallet.balance)}',
+                        style: kLargeTitleStyle2,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

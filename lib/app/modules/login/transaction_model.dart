@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class TransactionModel {
   final int id;
   final String type;

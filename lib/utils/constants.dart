@@ -20,6 +20,8 @@ const resendtoken_url = '/auth/otp/resend';
 const user_profile_url = '/user-mgt';
 const payment_initialisation_url = '/wallet/credit';
 const payment_confirmation_url = '/wallet/confirmation';
+const air_biller_url = '/utility/services/airtime/billers';
+const air_request_url = '/utility/services/airtime/request';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);
@@ -42,9 +44,9 @@ var kLargeTitleStyle = TextStyle(
 );
 
 var kLargeTitleStyle3 = TextStyle(
-  fontSize: 22.0,
+  fontSize: 20.0,
   fontWeight: FontWeight.bold,
-  color: kPrimaryLabelColor,
+  color: kPrimaryLabelColor.withOpacity(0.8),
   fontFamily: Platform.isIOS ? 'SF Pro Text' : 'Roboto',
   decoration: TextDecoration.none,
 );
@@ -86,7 +88,7 @@ var kHeadlineLabelStyle = TextStyle(
 var kHeadlineLabelStyle2 = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.w800,
-  color: Colors.white,
+  color: Colors.white.withOpacity(0.85),
   fontFamily: 'SF Pro Text',
   decoration: TextDecoration.none,
 );

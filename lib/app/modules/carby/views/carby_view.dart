@@ -22,7 +22,7 @@ class CarbyView extends GetView<CarbyController> {
                     top: 20,
                   ),
                   child: ServicesHeader(
-                    title: 'Carby',
+                    title: 'Caby',
                   ),
                 ),
                 Container(
@@ -41,10 +41,7 @@ class CarbyView extends GetView<CarbyController> {
                           topRight: Radius.circular(20),
                         )),
                     child: Column(
-                      children: [
-                        TopLine(),
-                        SearchBar()
-                      ],
+                      children: [TopLine(), SearchBar()],
                     ),
                   ),
                 )
@@ -77,53 +74,62 @@ class TopLine extends StatelessWidget {
 }
 
 class SearchBar extends StatelessWidget {
+  final String hint;
+  final Function search;
+
   const SearchBar({
     Key key,
+    this.hint = "Where to?",
+    this.search,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: 10,
-        left: 15,
-        right: 15,
-      ),
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.blue.shade200.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(10),
-        ),
+    return Ink(
+      child: InkWell(
+        onTap: search,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color:
-                      Colors.blue.shade200.withOpacity(0.5),
-                ),
-                child: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 15,
+            right: 15,
+          ),
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.blue.shade200.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.shade200.withOpacity(0.5),
+                    ),
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    hint,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
+                  )
+                ],
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Where to?",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              )
-            ],
+            ),
           ),
         ),
       ),

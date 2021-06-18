@@ -1,8 +1,9 @@
-import 'package:get/get.dart';
+import 'package:get/get_connect.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pxn_mobile/app/modules/utilities/air_request.dto.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
-class PaymentProvider extends GetConnect {
+class UtilitiesProvider extends GetConnect {
   final localStorage = GetStorage();
 
   @override
@@ -22,9 +23,8 @@ class PaymentProvider extends GetConnect {
     }
   }
 
-  Future<dynamic> initialisePayment(String amount) async {
-    final Response response = await post(payment_initialisation_url,
-        {"amount": double.parse(amount), "currency": "NGN"});
+  Future<dynamic> getAirtimeBiller() async {
+    final response = await get(air_biller_url);
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {
@@ -32,9 +32,8 @@ class PaymentProvider extends GetConnect {
     }
   }
 
-  Future<dynamic> confirmPayment(String ref, int txtId) async {
-    final Response response =
-        await get("$payment_confirmation_url?tx_ref=$ref&tx_id=$txtId");
+  Future<dynamic> getDataProviders(AirRequestDto requestDto) async {
+    final response = await post(air_request_url, requestDto.toMap());
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {

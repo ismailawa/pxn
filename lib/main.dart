@@ -6,7 +6,6 @@ import 'package:pxn_mobile/app/data/services/storage_services.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 import 'app/data/providers/auth_provider.dart';
-import 'app/modules/login/bindings/login_binding.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {

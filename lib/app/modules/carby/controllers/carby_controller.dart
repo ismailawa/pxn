@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 class CarbyController extends GetxController {
-  //TODO: Implement CarbyController
-
   final count = 0.obs;
   @override
   void onInit() {
