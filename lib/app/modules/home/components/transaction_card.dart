@@ -43,9 +43,9 @@ class TransactionCard extends StatelessWidget {
                         Text(
                           transaction.description,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             color: Colors.black87,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(

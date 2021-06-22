@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pxn_mobile/app/modules/components/services_header.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/product.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 import '../controllers/ecommerce_controller.dart';
@@ -10,61 +12,68 @@ import '../controllers/ecommerce_controller.dart';
 class EcommerceView extends GetView<EcommerceController> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Scaffold(
-          backgroundColor: Colors.blue.shade100.withOpacity(0.3),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ServicesHeader(
-                      title: 'ECommerce',
-                    ),
-                    SearchBar(
-                      hint: "Search product",
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CategoriesSection(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Products",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            "",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
+    return Obx(
+      () => Container(
+        color: Colors.white,
+        child: Scaffold(
+            backgroundColor: Colors.blue.shade100.withOpacity(0.3),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ServicesHeader(
+                        title: 'ECommerce',
                       ),
-                    ),
-                    EcomGridViewSection()
-                  ],
+                      SearchBar(
+                        hint: "Search product",
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CategoriesSection(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Products",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      EcomGridViewSection(
+                        products: controller.products.value,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 }
 
 class EcomGridViewSection extends StatelessWidget {
+  final List<Product> products;
+
   const EcomGridViewSection({
     Key key,
+    this.products,
   }) : super(key: key);
 
   @override
@@ -72,35 +81,43 @@ class EcomGridViewSection extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: GridView.builder(
-          padding: EdgeInsets.all(20),
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 0.8,
-          ),
-          itemBuilder: (context, index) {
-            return ProductCard(
-              onTap: () {
-                Get.toNamed("/product-details");
-              },
-            );
-          }),
+      child: products.length == 0
+          ? SizedBox.shrink()
+          : GridView.builder(
+              itemCount: products.length,
+              padding: EdgeInsets.all(20),
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (context, index) {
+                return ProductCard(
+                  product: products[index],
+                  onTap: () {
+                    Get.toNamed("/product-details", arguments: products[index]);
+                  },
+                );
+              }),
     );
   }
 }
 
 class ProductCard extends StatelessWidget {
+  final Product product;
   final Function onTap;
   const ProductCard({
     Key key,
     this.onTap,
+    this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency =
+        new NumberFormat.currency(locale: "en_US", symbol: "");
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -122,11 +139,13 @@ class ProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Hero(
-                    tag: 'product-tag',
+                    tag: "${product.id}",
                     child: Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 30),
+                      padding: EdgeInsets.only(
+                          top: 20, bottom: 30, left: 10, right: 10),
                       child: Image.asset(
-                        "assets/images/shoe.png",
+                        product.images[0],
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -139,11 +158,11 @@ class ProductCard extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          "2,000.00",
+                          '₦ ${formatCurrency.format(product.price)}',
                           style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w800,
-                          ),
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 10),
                         ),
                       ),
                       Container(

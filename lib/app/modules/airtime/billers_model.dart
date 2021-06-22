@@ -1,12 +1,12 @@
-class AirBillerModel {
+class BillersModel {
   final String serviceType;
   final String shortname;
   final int billerId;
   final int productId;
   final String name;
-  final List<String> plan;
+  final List<dynamic> plan;
 
-  AirBillerModel({
+  BillersModel({
     this.serviceType,
     this.shortname,
     this.billerId,
@@ -15,7 +15,7 @@ class AirBillerModel {
     this.plan,
   });
 
-  factory AirBillerModel.fromJson(Map<String, dynamic> json) => AirBillerModel(
+  factory BillersModel.fromJson(Map<String, dynamic> json) => BillersModel(
         serviceType: json['service_type'],
         shortname: json['shortname'],
         billerId: json['biller_id'],
@@ -24,7 +24,7 @@ class AirBillerModel {
         plan: json['plan'],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'service_type': serviceType,
         'shortname': shortname,
         'biller_id': billerId,
@@ -33,7 +33,7 @@ class AirBillerModel {
         'plan': plan,
       };
 
-  static List<AirBillerModel> airBillerModelParser(dynamic response) => response
-      .map<AirBillerModel>((res) => AirBillerModel.fromJson(res))
+  static List<BillersModel> billersModelParser(dynamic response) => response
+      .map<BillersModel>((json) => BillersModel.fromJson(json))
       .toList();
 }

@@ -42,5 +42,5 @@ class Pxn extends StatelessWidget {
 }
 
 Future<void> initServices() async {
-  Get.put(() => StorageServices());
+  await Get.putAsync(() => StorageServices().init());
 }

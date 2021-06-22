@@ -22,6 +22,10 @@ abstract class Routes {
   static const CUSTOM_BOTTOM_SHEET = _Paths.CUSTOM_BOTTOM_SHEET;
   static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
   static const CART = _Paths.CART;
+  static const DATA_BUNDLE = _Paths.DATA_BUNDLE;
+  static const CABLE = _Paths.CABLE;
+  static const ELECTRICITY = _Paths.ELECTRICITY;
+  static const CABY_MAP = _Paths.CABY_MAP;
 }
 
 abstract class _Paths {
@@ -45,4 +49,8 @@ abstract class _Paths {
   static const CUSTOM_BOTTOM_SHEET = '/custom-bottom-sheet';
   static const PRODUCT_DETAILS = '/product-details';
   static const CART = '/cart';
+  static const DATA_BUNDLE = '/data-bundle';
+  static const CABLE = '/cable';
+  static const ELECTRICITY = '/electricity';
+  static const CABY_MAP = '/caby-map';
 }

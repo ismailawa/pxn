@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:pxn_mobile/app/modules/airtime/bindings/airtime_binding.dart';
 import 'package:pxn_mobile/app/modules/airtime/views/airtime_view.dart';
+import 'package:pxn_mobile/app/modules/cable/bindings/cable_binding.dart';
+import 'package:pxn_mobile/app/modules/cable/views/cable_view.dart';
 import 'package:pxn_mobile/app/modules/carby/bindings/carby_binding.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
 import 'package:pxn_mobile/app/modules/cart/bindings/cart_binding.dart';
@@ -10,10 +12,14 @@ import 'package:pxn_mobile/app/modules/customBottomSheet/bindings/custom_bottom_
 import 'package:pxn_mobile/app/modules/customBottomSheet/views/custom_bottom_sheet_view.dart';
 import 'package:pxn_mobile/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:pxn_mobile/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:pxn_mobile/app/modules/dataBundle/bindings/data_bundle_binding.dart';
+import 'package:pxn_mobile/app/modules/dataBundle/views/data_bundle_view.dart';
 import 'package:pxn_mobile/app/modules/ecommerce/bindings/ecommerce_binding.dart';
 import 'package:pxn_mobile/app/modules/ecommerce/views/ecommerce_view.dart';
 import 'package:pxn_mobile/app/modules/ecurrency/bindings/ecurrency_binding.dart';
 import 'package:pxn_mobile/app/modules/ecurrency/views/ecurrency_view.dart';
+import 'package:pxn_mobile/app/modules/electricity/bindings/electricity_binding.dart';
+import 'package:pxn_mobile/app/modules/electricity/views/electricity_view.dart';
 import 'package:pxn_mobile/app/modules/forgotpassword/bindings/forgotpassword_binding.dart';
 import 'package:pxn_mobile/app/modules/forgotpassword/views/forgotpassword_view.dart';
 import 'package:pxn_mobile/app/modules/home/bindings/home_binding.dart';
@@ -147,6 +153,21 @@ class AppPages {
       name: _Paths.CART,
       page: () => CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_BUNDLE,
+      page: () => DataBundleView(),
+      binding: DataBundleBinding(),
+    ),
+    GetPage(
+      name: _Paths.CABLE,
+      page: () => CableView(),
+      binding: CableBinding(),
+    ),
+    GetPage(
+      name: _Paths.ELECTRICITY,
+      page: () => ElectricityView(),
+      binding: ElectricityBinding(),
     ),
   ];
 }

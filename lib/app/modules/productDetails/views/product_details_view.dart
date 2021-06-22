@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pxn_mobile/app/modules/components/services_header.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
@@ -9,136 +10,144 @@ import '../controllers/product_details_controller.dart';
 class ProductDetailsView extends GetView<ProductDetailsController> {
   @override
   Widget build(BuildContext context) {
+    final formatCurrency =
+        new NumberFormat.currency(locale: "en_US", symbol: "");
     return Stack(
       children: [
         Container(
           color: Colors.white,
         ),
         Bg1(),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 120,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Material(
-                color: Colors.transparent,
-                child: Container(
-                  padding: EdgeInsets.all(30),
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      Text(
-                        "African Bags and shoes",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
+        Obx(
+          () => Positioned(
+            left: 0,
+            right: 0,
+            bottom: 120,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Material(
+                  color: Colors.transparent,
+                  child: Container(
+                    padding: EdgeInsets.all(30),
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        Text(
+                          "${controller.product.value.title}",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "African Bags and shoes African Bags and shoes African Bags and shoes African Bags and shoes African Bags and shoes",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black54,
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Size:",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                        Text(
+                          "${controller.product.value.description}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Size:",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "50",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Row(
-                        children: [
-                          SmallBtn(
-                            sign: "-",
-                            onTap: () {},
-                          ),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: pxnSecondaryColor,
-                              borderRadius: BorderRadius.circular(10),
+                            Text(
+                              "50",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            child: Center(
-                              child: Text(
-                                "3",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 26,
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            SmallBtn(
+                              sign: "-",
+                              onTap: () {
+                                controller.decreaseCount();
+                              },
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: pxnSecondaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${controller.productCount.value}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 26,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SmallBtn(
-                            onTap: () {},
-                          ),
-                          Spacer(),
-                          Text(
-                            "5000.00",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                            SmallBtn(
+                              onTap: () {
+                                controller.increaseCount();
+                              },
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            Spacer(),
+                            Text(
+                              '₦ ${formatCurrency.format(controller.productCount.value * controller.product.value.price)}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                top: -130,
-                child: Hero(
-                  tag: 'product-tag',
-                  child: Container(
-                    height: MediaQuery.of(context).size.width * 0.6,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Image.asset("assets/images/shoe.png"),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: -130,
+                  child: Hero(
+                    tag: '${controller.product.value.id}',
+                    child: Container(
+                      height: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Image.asset(controller.product.value.images[0]),
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         Material(

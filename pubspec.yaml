@@ -30,6 +30,13 @@ dependencies:
   get_storage: ^2.0.2
   rave_flutter: ^0.0.9-alpha+2
   intl: ^0.17.0
+  modal_bottom_sheet: ^2.0.0
+  location: ^4.2.0
+  google_maps_flutter: ^2.0.6
+  geolocator: ^7.1.0
+  geocoding: ^1.0.5
+  flutter_google_places: ^0.3.0
+  google_maps_webservice: ^0.0.19
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +45,9 @@ dev_dependencies:
 dependency_overrides:
   flutter_svg: ^0.22.0
   intl: ^0.17.0
+  dio: ^4.0.0
+  http: ^0.13.3
+  plugin_platform_interface: ^2.0.0
 
 
 
