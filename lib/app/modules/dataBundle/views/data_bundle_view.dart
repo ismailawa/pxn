@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/components/custom_btn.dart';
+import 'package:pxn_mobile/app/modules/components/custom_dropdown.dart';
 import 'package:pxn_mobile/app/modules/components/custom_input.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 import '../controllers/data_bundle_controller.dart';
 
+// ignore: must_be_immutable
 class DataBundleView extends GetView<DataBundleController> {
+  var _ = Get.put(DataBundleController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,12 +47,11 @@ class DataBundleView extends GetView<DataBundleController> {
               child: Form(
                   child: Column(
                 children: [
-                  // CustomDropDown(
-
-                  //   onChanged: (value) {
-
-                  //   },
-                  // ),
+                  CustomDropDown(
+                    hint: "Select Provider",
+                    billers: controller.providers.value,
+                    onChanged: (value) {},
+                  ),
                   CustomInput(
                     icon: Icons.phone,
                     hint: "Enter Phone Number",

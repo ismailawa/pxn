@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
+import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
+import 'package:pxn_mobile/app/data/providers/payment_provider.dart';
 
 class TransfersController extends GetxController {
-  final count = 0.obs;
+  PaymentProvider paymentProvider = Get.put(PaymentProvider());
+  AuthProvider authProvider = Get.find<AuthProvider>();
+
   @override
   void onInit() {
     super.onInit();
@@ -14,5 +18,4 @@ class TransfersController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

@@ -26,6 +26,7 @@ abstract class Routes {
   static const CABLE = _Paths.CABLE;
   static const ELECTRICITY = _Paths.ELECTRICITY;
   static const CABY_MAP = _Paths.CABY_MAP;
+  static const SUCCESS = _Paths.SUCCESS;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const CABLE = '/cable';
   static const ELECTRICITY = '/electricity';
   static const CABY_MAP = '/caby-map';
+  static const SUCCESS = '/success';
 }

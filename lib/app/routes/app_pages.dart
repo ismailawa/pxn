@@ -25,6 +25,7 @@ import 'package:pxn_mobile/app/modules/forgotpassword/views/forgotpassword_view.
 import 'package:pxn_mobile/app/modules/home/bindings/home_binding.dart';
 import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/login/bindings/login_binding.dart';
+import 'package:pxn_mobile/app/modules/login/middlewares/auth_middleware.dart';
 import 'package:pxn_mobile/app/modules/login/views/login_view.dart';
 import 'package:pxn_mobile/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:pxn_mobile/app/modules/onboarding/views/onboarding_view.dart';
@@ -38,6 +39,8 @@ import 'package:pxn_mobile/app/modules/services/bindings/services_binding.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
 import 'package:pxn_mobile/app/modules/settings/bindings/settings_binding.dart';
 import 'package:pxn_mobile/app/modules/settings/views/settings_view.dart';
+import 'package:pxn_mobile/app/modules/success/bindings/success_binding.dart';
+import 'package:pxn_mobile/app/modules/success/views/success_view.dart';
 import 'package:pxn_mobile/app/modules/transactions/bindings/transactions_binding.dart';
 import 'package:pxn_mobile/app/modules/transactions/views/transactions_view.dart';
 import 'package:pxn_mobile/app/modules/transfers/bindings/transfers_binding.dart';
@@ -57,7 +60,7 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
-      // middlewares: [AuthMiddleware()],
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.REGISTRATION,
@@ -73,6 +76,7 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => OnboardingView(),
       binding: OnboardingBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.DASHBOARD,
@@ -168,6 +172,12 @@ class AppPages {
       name: _Paths.ELECTRICITY,
       page: () => ElectricityView(),
       binding: ElectricityBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUCCESS,
+      page: () => SuccessView(),
+      binding: SuccessBinding(),
+      transition: Transition.downToUp,
     ),
   ];
 }

@@ -3,7 +3,6 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_maps_webservice/places.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 

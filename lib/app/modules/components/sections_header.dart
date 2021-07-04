@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pxn_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({
+  final dbController = Get.put(DashboardController());
+  HeaderSection({
     Key key,
   }) : super(key: key);
 

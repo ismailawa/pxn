@@ -9,6 +9,7 @@ import 'package:pxn_mobile/utils/helpers.dart';
 class CustomBottomSheetController extends GetxController {
   UtilitiesProvider utilitiesProvider = Get.put(UtilitiesProvider());
   AuthProvider authProvider = Get.find<AuthProvider>();
+  GlobalKey<FormState> airTimeFormState = GlobalKey<FormState>();
 
   RxList<BillersModel> billers = RxList<BillersModel>([]);
   Rx<BillersModel> selectBiller = Rx<BillersModel>(null);
@@ -54,13 +55,26 @@ class CustomBottomSheetController extends GetxController {
         amount: double.tryParse(amountCtrl.text),
       );
       final result = await this.utilitiesProvider.purchaceAirtime(data);
+      amountCtrl.clear();
+      phoneNumberCtrl.clear();
       Get.back();
       Get.back();
-      Get.snackbar("Message", result['message']);
+      // Get.snackbar("Message", result['message']);
+      Get.toNamed("/success", arguments: {
+        "message": result["message"],
+        "status": true,
+        "title": "Congratulation",
+        "image": "assets/images/green-check.json"
+      });
+      await authProvider.getUserProfile();
     } catch (e) {
-      print(e);
       Get.back();
-      Get.snackbar("Airtime ", "Purchase failed $e");
+      Get.toNamed("/success", arguments: {
+        "message": "Purchase failed $e",
+        "status": false,
+        "title": "Sorry",
+        "image": "assets/images/error.json"
+      });
     }
   }
 

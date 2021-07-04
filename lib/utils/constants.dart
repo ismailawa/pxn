@@ -22,6 +22,11 @@ const payment_initialisation_url = '/wallet/credit';
 const payment_confirmation_url = '/wallet/confirmation';
 const air_biller_url = '/utility/services/airtime/billers';
 const air_request_url = '/utility/services/airtime/request';
+const user_wallet_confirmation_url = '/wallet/check';
+const wallet_transfer_url = '/wallet/transfer';
+const data_providers_url = '/utility/services/databundle/providers';
+const data_bundles_url = '/utility/services/databundle/bundles';
+const purcharce_data_bundles_url = '/utility/services/databundle/bundles';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);

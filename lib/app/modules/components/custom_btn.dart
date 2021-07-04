@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
@@ -33,4 +32,3 @@ class CustomBtn extends StatelessWidget {
     );
   }
 }
-

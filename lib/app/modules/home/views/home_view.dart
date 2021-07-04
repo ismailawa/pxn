@@ -4,26 +4,28 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/components/custom_input.dart';
 import 'package:pxn_mobile/app/modules/components/sections_header.dart';
+import 'package:pxn_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:pxn_mobile/app/modules/home/components/services_list_section.dart';
+import 'package:pxn_mobile/app/modules/home/components/shimmer_loading.dart';
 import 'package:pxn_mobile/app/modules/home/components/transaction_list_section.dart';
 import 'package:pxn_mobile/app/modules/home/components/wallet_card.dart';
 import 'package:pxn_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 
 class HomeView extends StatelessWidget {
+  final List<GlobalKey> globalkeys;
   final controller = Get.put(HomeController());
+
+  HomeView({Key key, this.globalkeys}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue.shade100.withOpacity(0.3),
       body: Obx(
         () => SafeArea(
-          child: controller.user.value.id == null
-              ? Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                )
+          child: controller.user.value == null
+              ? LoadingContainer(controller: controller)
               : SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Container(

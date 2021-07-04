@@ -10,6 +10,7 @@ import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/login/user_model.dart';
 import 'package:pxn_mobile/utils/helpers.dart';
 import 'package:rave_flutter/rave_flutter.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class HomeController extends GetxController {
   PaymentProvider paymentProvider = Get.put(PaymentProvider());
@@ -20,12 +21,16 @@ class HomeController extends GetxController {
 
   AuthProvider authProvider = Get.find<AuthProvider>();
 
-  Rx<User> user = Rx<User>(User());
+  Rx<User> user = Rx<User>(null);
 
   @override
   void onInit() {
     super.onInit();
     amountCtrl = TextEditingController();
+    localStorage.listenKey("profile", (u) {
+      User decodedUser = User.fromJson(u);
+      user(decodedUser);
+    });
     getCurrentUser();
   }
 
@@ -92,17 +97,8 @@ class HomeController extends GetxController {
 
   Future<void> getCurrentUser() async {
     try {
-      final result = await authProvider.getUserProfile();
-      if (result['success']) {
-        await localStorage.remove('profile');
-        await localStorage.write('profile', result['data']);
-        final decodedUser =
-            User.fromJson(result['data'] as Map<String, dynamic>);
-        print(result['data']);
-        user(decodedUser);
-      }
+      await authProvider.getUserProfile();
     } catch (e) {
-      print(e);
       Get.snackbar("Profile Error ", "Fetching Profile failed $e");
     }
   }

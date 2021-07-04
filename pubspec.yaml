@@ -37,6 +37,10 @@ dependencies:
   geocoding: ^1.0.5
   flutter_google_places: ^0.3.0
   google_maps_webservice: ^0.0.19
+  lottie: ^1.0.1
+  shimmer: ^2.0.0
+  showcaseview: ^1.1.0
+  fl_chart: ^0.36.2
 
 dev_dependencies:
   flutter_test:
@@ -48,8 +52,7 @@ dependency_overrides:
   dio: ^4.0.0
   http: ^0.13.3
   plugin_platform_interface: ^2.0.0
-
-
+  equatable: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -123,4 +126,3 @@ flutter:
         - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
           weight: 100
           style: italic
-

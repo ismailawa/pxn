@@ -42,13 +42,13 @@ class AuthProvider extends GetConnect {
     }
   }
 
-  Future<dynamic> getUserProfile() async {
+  Future<void> getUserProfile() async {
     setTokenHeader();
     final Response response = await get(user_profile_url);
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {
-      return response.body;
+      await localStorage.write('profile', response.body['data']);
     }
   }
 
