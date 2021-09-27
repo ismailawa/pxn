@@ -9,6 +9,7 @@ class User {
   String username;
   String email;
   String phone;
+  String avatar;
   String role;
   String password;
   bool isPhoneVerified;
@@ -30,6 +31,7 @@ class User {
     this.username,
     this.email,
     this.phone,
+    this.avatar,
     this.role,
     this.password,
     this.isPhoneVerified,
@@ -53,6 +55,7 @@ class User {
         email: json['email'],
         phone: json['phone'],
         role: json['role'],
+        avatar: json['avatar'],
         password: json['password'],
         isPhoneVerified: json['isPhoneVerified'],
         isBvnVerified: json['isBvnVerified'],
@@ -76,6 +79,7 @@ class User {
     data['username'] = username;
     data['email'] = email;
     data['phone'] = phone;
+    data['avatar'] = avatar;
     data['role'] = role;
     data['password'] = password;
     data['isPhoneVerified'] = isPhoneVerified;

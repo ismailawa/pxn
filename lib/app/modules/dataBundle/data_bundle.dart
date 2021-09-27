@@ -3,7 +3,7 @@ class DataBundle {
   final String allowance;
   final double price;
   final String validity;
-  final int datacode;
+  final dynamic datacode;
 
   DataBundle({
     this.name,
@@ -16,7 +16,7 @@ class DataBundle {
   factory DataBundle.fromJson(Map<String, dynamic> json) => DataBundle(
         name: json['name'],
         allowance: json['allowance'],
-        price: json['price'],
+        price: (json['price'] as int).toDouble(),
         validity: json['validity'],
         datacode: json['datacode'],
       );
@@ -26,9 +26,9 @@ class DataBundle {
         'allowance': allowance,
         'price': price,
         'validity': validity,
-        'datacode': datacode,
+        "datacode": datacode,
       };
 
-  List<DataBundle> dataBundleParser(dynamic response) =>
+  static List<DataBundle> dataBundleParser(dynamic response) =>
       response.map<DataBundle>((json) => DataBundle.fromJson(json)).toList();
 }

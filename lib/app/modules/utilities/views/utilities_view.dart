@@ -3,10 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
-import 'package:pxn_mobile/app/modules/components/custom_btn.dart';
-import 'package:pxn_mobile/app/modules/components/custom_input.dart';
 import 'package:pxn_mobile/app/modules/components/services_header.dart';
-import 'package:pxn_mobile/app/modules/customBottomSheet/views/custom_bottom_sheet_view.dart';
 import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/utils/constants.dart';
 

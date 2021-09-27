@@ -29,7 +29,7 @@ class ProviderModel {
         'name': name,
       };
 
-  static List<ProviderModel> billersModelParser(dynamic response) => response
+  static List<ProviderModel> providersModelParser(dynamic response) => response
       .map<ProviderModel>((json) => ProviderModel.fromJson(json))
       .toList();
 }

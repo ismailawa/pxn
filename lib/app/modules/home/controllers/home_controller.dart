@@ -10,7 +10,6 @@ import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/login/user_model.dart';
 import 'package:pxn_mobile/utils/helpers.dart';
 import 'package:rave_flutter/rave_flutter.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class HomeController extends GetxController {
   PaymentProvider paymentProvider = Get.put(PaymentProvider());
@@ -28,6 +27,7 @@ class HomeController extends GetxController {
     super.onInit();
     amountCtrl = TextEditingController();
     localStorage.listenKey("profile", (u) {
+      print(u);
       User decodedUser = User.fromJson(u);
       user(decodedUser);
     });

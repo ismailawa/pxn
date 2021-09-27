@@ -35,7 +35,6 @@ class AuthProvider extends GetConnect {
   Future<dynamic> register(UserRegDto user) async {
     final Response response = await post(register_url, user.toMap());
     if (response.status.hasError) {
-      printError(info: response.body.toString());
       throw Exception(response.statusText);
     } else {
       return response.body;

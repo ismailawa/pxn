@@ -37,6 +37,7 @@ class LoginController extends GetxController {
       loadingView("Authenticating");
 
       final result = await authProvider.login(username.text, password.text);
+      print(result);
       await localStorage.write("isLogin", true);
       await localStorage.write('user', result['data']);
       await localStorage.write('token', result['data']['token']);

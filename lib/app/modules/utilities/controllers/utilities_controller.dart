@@ -28,11 +28,11 @@ class UtilitiesController extends GetxController {
         break;
 
       case 'cable':
-        Get.bottomSheet(CableView());
+        Get.bottomSheet(CableView(), isScrollControlled: true);
         break;
 
       case 'electricity':
-        Get.bottomSheet(ElectricityView());
+        Get.bottomSheet(ElectricityView(), isScrollControlled: true);
         break;
       default:
         Get.bottomSheet(CustomBottomSheetView());

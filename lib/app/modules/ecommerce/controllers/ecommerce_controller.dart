@@ -1,68 +1,69 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/category.dart';
 import 'package:pxn_mobile/app/modules/ecommerce/product.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/providers/ecommerce_provider.dart';
 
 class EcommerceController extends GetxController {
-  var produtData = [
-    Product(
-        id: 1,
-        title: "Shoe and Bags",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 2000,
-        images: ["assets/images/shoe.png"]),
-    Product(
-        id: 2,
-        title: "Traditional cloth",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 3000,
-        images: ["assets/images/system.png"]),
-    Product(
-        id: 3,
-        title: "Laptop devices",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 2500,
-        images: ["assets/images/shoemale.png"]),
-    Product(
-        id: 4,
-        title: "Machinaries and tools",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 3500,
-        images: ["assets/images/collabe.png"]),
-    Product(
-        id: 5,
-        title: "Shoe and Bags",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 4500.50,
-        images: ["assets/images/shoe.png"]),
-    Product(
-        id: 6,
-        title: "Shoe and Bags",
-        description: "This african shoe and bags design with local materials",
-        quantity: 100,
-        price: 8000,
-        images: ["assets/images/shoemale.png"]),
-  ];
+  EcommerceProvider ecommerceProvider = Get.put(EcommerceProvider());
+  final localStorage = GetStorage();
+  RxInt selectedCategory = RxInt(0);
 
   RxList<Product> products = RxList<Product>([]);
-
-  Future<void> getProducts() async {
-    await Future.delayed(Duration(seconds: 3));
-    products(produtData);
-  }
+  RxList<Product> tempProducts = RxList<Product>([]);
+  RxList<Category> categories = RxList<Category>([]);
+  RxInt cartCount = RxInt(0);
 
   @override
   void onInit() {
     super.onInit();
-    getProducts();
+    localStorage.listenKey("cartCount", (u) {
+      print(u);
+      cartCount(u);
+    });
+
+    cartCount(localStorage.read("cartCount"));
+    getAllCategories();
+    getAllProducts();
   }
 
   @override
   void onReady() {
     super.onReady();
+  }
+
+  Future<void> getAllCategories() async {
+    try {
+      final result = await ecommerceProvider.getAllCategories();
+      final data = Category.categoriesModelParser(result["data"]);
+      categories(data);
+    } catch (e) {
+      Get.snackbar("Server Error", e.toString());
+    }
+  }
+
+  selectCategory(int catId) {
+    selectedCategory(catId);
+    if (catId == 0) {
+      products(tempProducts.value);
+    } else {
+      final data = tempProducts.value
+          .where((element) => element.productCategory["id"] == catId)
+          .toList();
+      products(data);
+    }
+  }
+
+  Future<void> getAllProducts() async {
+    try {
+      final result = await ecommerceProvider.getAllProducts();
+      print(result);
+      final data = Product.productsModelParser(result["data"]["products"]);
+      products(data);
+      tempProducts(data);
+    } catch (e) {
+      Get.snackbar("Server Error", e.toString());
+    }
   }
 
   @override

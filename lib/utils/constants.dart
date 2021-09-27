@@ -15,18 +15,48 @@ const animationDuration = Duration(microseconds: 200);
 const base_url = 'https://pxn-backend.herokuapp.com/api/v1';
 const login_url = '/auth/login';
 const register_url = '/auth/register';
-const verify_url = '/auth/otp/verify';
+const get_user_url = '/auth/register';
+const verify_url = '/user-mgt/';
 const resendtoken_url = '/auth/otp/resend';
 const user_profile_url = '/user-mgt';
 const payment_initialisation_url = '/wallet/credit';
 const payment_confirmation_url = '/wallet/confirmation';
 const air_biller_url = '/utility/services/airtime/billers';
 const air_request_url = '/utility/services/airtime/request';
-const user_wallet_confirmation_url = '/wallet/check';
+const user_wallet_confirmation_url = '/wallet/check?username=';
 const wallet_transfer_url = '/wallet/transfer';
 const data_providers_url = '/utility/services/databundle/providers';
 const data_bundles_url = '/utility/services/databundle/bundles';
-const purcharce_data_bundles_url = '/utility/services/databundle/bundles';
+const cable_providers_url = '/utility/services/cabletv/providers';
+const verify_cable_account_url = '/utility/services/cabletv/verify-account';
+const get_multichoice_list_cable = '/utility/services/cabletv/multichoice-lis';
+const get_addons_list_cable = '/utility/services/cabletv/multichoice-addons';
+const request_cable_tv = '/utility/services/cabletv/request';
+const purcharce_data_bundles_url = '/utility/services/databundle/request';
+const get_electricity_provider_url = '/utility/services/electricity/providers';
+const verify_electricity_account_url =
+    '/utility/services/electricity/verify-account';
+const purchase_electricity_account_url =
+    '/utility/services/electricity/request';
+const ecommerce_categories_url = '/product/category/all';
+const ecommerce_products_url = '/store/product/all';
+const add_to_cart_url = '/user/cart/add';
+const get_cart_url = '/user/cart';
+const checkout_cart_url = '/user/cart/checkout/';
+const dec_inc_item_cart_url = '/user/cart/';
+const remove_item_cart_url = '/user/cart/remove/';
+const add_shoping_address_url = '/shipping/add';
+const get_orders_url = '/order/';
+const get_cable_providers = '/utility/services/cabletv/providers';
+const verify_cable_account = '/utility/services/cabletv/verify-account';
+const get_multi_choice_list = '/utility/services/cabletv/multichoice-list';
+const get_multi_choice_addon = '/utility/services/cabletv/multichoice-addons';
+const purchase_multi_choice_tv = '/utility/services/cabletv/request';
+const transaction_data_history = '/utility/transaction/airtime-data/history/';
+const transaction_electricity_history =
+    '/utility/transaction/electricity/history/';
+const transaction_cable_history = '/utility/transaction/cable/history/';
+const transaction_wallet_history = '/wallet/transaction/history/';
 
 // Colors
 const kBackgroundColor = Color(0xFFE7EEFB);

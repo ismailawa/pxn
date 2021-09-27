@@ -8,8 +8,10 @@ class CustomInput extends StatelessWidget {
   final bool isTogglePassword;
   final Function(bool) togglePassword;
   final Function(String) validator;
+  final Function(dynamic) onChanged;
   final TextInputType inputType;
   final List<TextInputFormatter> formater;
+  final bool readOnly;
 
   final String hint;
   final IconData icon;
@@ -20,8 +22,10 @@ class CustomInput extends StatelessWidget {
     this.controller,
     this.isPassword = false,
     this.isTogglePassword = false,
+    this.readOnly = false,
     this.togglePassword,
     this.validator,
+    this.onChanged,
     this.inputType = TextInputType.text,
     this.formater,
   }) : super(key: key);
@@ -31,6 +35,8 @@ class CustomInput extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 16),
       child: TextFormField(
+        onChanged: onChanged,
+        readOnly: readOnly,
         inputFormatters: formater,
         validator: validator,
         controller: controller,

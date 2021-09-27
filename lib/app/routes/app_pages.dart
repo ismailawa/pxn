@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:pxn_mobile/app/modules/add_shipping_address/bindings/add_shipping_address_binding.dart';
+import 'package:pxn_mobile/app/modules/add_shipping_address/views/add_shipping_address_view.dart';
 import 'package:pxn_mobile/app/modules/airtime/bindings/airtime_binding.dart';
 import 'package:pxn_mobile/app/modules/airtime/views/airtime_view.dart';
 import 'package:pxn_mobile/app/modules/cable/bindings/cable_binding.dart';
@@ -29,6 +31,8 @@ import 'package:pxn_mobile/app/modules/login/middlewares/auth_middleware.dart';
 import 'package:pxn_mobile/app/modules/login/views/login_view.dart';
 import 'package:pxn_mobile/app/modules/onboarding/bindings/onboarding_binding.dart';
 import 'package:pxn_mobile/app/modules/onboarding/views/onboarding_view.dart';
+import 'package:pxn_mobile/app/modules/orders/bindings/orders_binding.dart';
+import 'package:pxn_mobile/app/modules/orders/views/orders_view.dart';
 import 'package:pxn_mobile/app/modules/productDetails/bindings/product_details_binding.dart';
 import 'package:pxn_mobile/app/modules/productDetails/views/product_details_view.dart';
 import 'package:pxn_mobile/app/modules/profile/bindings/profile_binding.dart';
@@ -178,6 +182,16 @@ class AppPages {
       page: () => SuccessView(),
       binding: SuccessBinding(),
       transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: _Paths.ADD_SHIPPING_ADDRESS,
+      page: () => AddShippingAddressView(),
+      binding: AddShippingAddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDERS,
+      page: () => OrdersView(),
+      binding: OrdersBinding(),
     ),
   ];
 }

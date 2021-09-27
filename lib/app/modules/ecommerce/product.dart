@@ -1,35 +1,60 @@
+import 'package:pxn_mobile/app/modules/ecommerce/vendor.dart';
+
 class Product {
   final int id;
-  final String title;
+  final String name;
   final String description;
+  final dynamic sku;
   final int quantity;
   final double price;
-  final List<String> images;
+  final String image;
+  final Map<String, dynamic> vendor;
+  final Map<String, dynamic> productCategory;
+  final Map<String, dynamic> productSubcategory;
+  final Map<String, dynamic> productDiscount;
 
   Product({
     this.id,
-    this.title,
+    this.name,
     this.description,
+    this.sku,
     this.quantity,
     this.price,
-    this.images,
+    this.image,
+    this.vendor,
+    this.productCategory,
+    this.productSubcategory,
+    this.productDiscount,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json['id'],
-        title: json['title'],
+        name: json['name'],
         description: json['description'],
+        sku: json['sku'],
         quantity: json['quantity'],
-        price: json['price'],
-        images: json['images'],
+        price: (json['price'] as int).toDouble(),
+        image: json['image'],
+        vendor: json['vendor'],
+        productCategory: json['productCategory'],
+        productSubcategory: json['productSubcategory'],
+        productDiscount: json['productDiscount'],
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'title': title,
+        'name': name,
         'description': description,
+        'sku': sku,
         'quantity': quantity,
         'price': price,
-        'images': images
+        'image': image,
+        'vendor': vendor,
+        'productCategory': productCategory,
+        'productSubcategory': productSubcategory,
+        'productDiscount': productDiscount,
       };
+
+  static List<Product> productsModelParser(dynamic response) =>
+      response.map<Product>((json) => Product.fromJson(json)).toList();
 }

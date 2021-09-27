@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:pxn_mobile/app/modules/cart/controllers/cart_controller.dart';
 import 'package:pxn_mobile/app/modules/ecommerce/product.dart';
 
 class ProductDetailsController extends GetxController {
   RxInt productCount = RxInt(1);
   Rx<Product> product = Rx<Product>(Product());
+  CartController cartController = Get.put(CartController());
+  RxBool isLoading = RxBool(false);
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -31,7 +33,16 @@ class ProductDetailsController extends GetxController {
     }
   }
 
+  Future<void> addToCart() async {
+    isLoading(true);
+    final result =
+        await cartController.addToCart(product.value.id, productCount.value);
+    isLoading(false);
+    Get.snackbar("Success", "Item Added to Cart");
+    await cartController.getCart();
+    print(result);
+  }
+
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

@@ -27,6 +27,8 @@ abstract class Routes {
   static const ELECTRICITY = _Paths.ELECTRICITY;
   static const CABY_MAP = _Paths.CABY_MAP;
   static const SUCCESS = _Paths.SUCCESS;
+  static const ADD_SHIPPING_ADDRESS = _Paths.ADD_SHIPPING_ADDRESS;
+  static const ORDERS = _Paths.ORDERS;
 }
 
 abstract class _Paths {
@@ -55,4 +57,6 @@ abstract class _Paths {
   static const ELECTRICITY = '/electricity';
   static const CABY_MAP = '/caby-map';
   static const SUCCESS = '/success';
+  static const ADD_SHIPPING_ADDRESS = '/add-shipping-address';
+  static const ORDERS = '/orders';
 }

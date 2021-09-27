@@ -54,6 +54,15 @@ class UtilitiesProvider extends GetConnect {
     }
   }
 
+  Future<dynamic> getCableProviders() async {
+    final response = await get(cable_providers_url);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
   Future<dynamic> getDataBundles(String serviceType) async {
     final response =
         await post(data_bundles_url, {"service_type": serviceType});
@@ -65,8 +74,97 @@ class UtilitiesProvider extends GetConnect {
   }
 
   Future<dynamic> purchaseDataBundles(DataDto dataDto) async {
-    final response = await post(
-        purcharce_data_bundles_url, {"service_type": dataDto.toJson()});
+    final response = await post(purcharce_data_bundles_url, dataDto.toJson());
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> getElectricityProvider() async {
+    final response = await get(get_electricity_provider_url);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> verifyElectricityAccount(Map<String, dynamic> info) async {
+    final response = await post(verify_electricity_account_url, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> purchaceElectricity(Map<String, dynamic> info) async {
+    final response = await post(purchase_electricity_account_url, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> getCableProvider() async {
+    final response = await get(get_electricity_provider_url);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> verifyCableAccount(Map<String, dynamic> info) async {
+    final response = await post(verify_cable_account_url, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> verifyWalletAccount(String username) async {
+    final response = await get("$user_wallet_confirmation_url$username");
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> transferWalletToWallet(Map<String, dynamic> info) async {
+    final response = await post(wallet_transfer_url, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> getMultipleChoice(Map<String, dynamic> info) async {
+    final response = await post(get_multichoice_list_cable, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> getMultipleChoiceAddons(Map<String, dynamic> info) async {
+    final response = await post(purchase_electricity_account_url, info);
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> purchaseCable(Map<String, dynamic> info) async {
+    final response = await post(purchase_electricity_account_url, info);
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {

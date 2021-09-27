@@ -17,7 +17,12 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
         Container(
           color: Colors.white,
         ),
-        Bg1(),
+        Obx(
+          () => Bg1(
+            onTap: () => controller.addToCart(),
+            isLoading: controller.isLoading.value,
+          ),
+        ),
         Obx(
           () => Positioned(
             left: 0,
@@ -41,7 +46,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       children: [
                         Spacer(),
                         Text(
-                          "${controller.product.value.title}",
+                          "${controller.product.value.name}",
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -55,7 +60,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                           "${controller.product.value.description}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.normal,
                             color: Colors.black54,
                           ),
@@ -63,30 +68,30 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Size:",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "50",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     Text(
+                        //       "Size:",
+                        //       style: TextStyle(
+                        //         fontSize: 20,
+                        //         color: Colors.black,
+                        //         fontWeight: FontWeight.bold,
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     // Text(
+                        //     //   "50",
+                        //     //   style: TextStyle(
+                        //     //     fontSize: 20,
+                        //     //     color: Colors.black,
+                        //     //     fontWeight: FontWeight.bold,
+                        //     //   ),
+                        //     // ),
+                        //   ],
+                        // ),
                         Spacer(),
                         Row(
                           children: [
@@ -142,7 +147,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                     child: Container(
                       height: MediaQuery.of(context).size.width * 0.6,
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child: Image.asset(controller.product.value.images[0]),
+                      child: Image.network(controller.product.value.image),
                     ),
                   ),
                 )
@@ -167,8 +172,13 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
 }
 
 class Bg1 extends StatelessWidget {
+  final VoidCallback onTap;
+  final bool isLoading;
+
   const Bg1({
     Key key,
+    this.onTap,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -229,18 +239,23 @@ class Bg1 extends StatelessWidget {
                         ),
                         Flexible(
                           flex: 10,
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: pxnSecondaryColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Add to cart",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                          child: GestureDetector(
+                            onTap: onTap,
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: pxnSecondaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: isLoading
+                                    ? CircularProgressIndicator()
+                                    : Text(
+                                        "Add to cart",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),

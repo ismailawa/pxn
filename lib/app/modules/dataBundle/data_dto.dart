@@ -2,7 +2,7 @@ class DataDto {
   final String phone;
   final double amount;
   final String serviceType;
-  final int datacode;
+  final dynamic datacode;
 
   DataDto({
     this.phone,
