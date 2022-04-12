@@ -16,7 +16,7 @@ class CartProvider extends GetConnect {
     if (token != null) {
       // It's will attach 'apikey' property on header from all requests
       httpClient.addRequestModifier((request) {
-        request.headers['x-access-token'] = token;
+        request.headers['Authorization'] = "Bearer $token";
         return request;
       });
     }
@@ -85,25 +85,25 @@ class CartProvider extends GetConnect {
     }
   }
 
-  Future<dynamic> addShippingAddress(String address, String city, String state,
-      String country, String mobile, String postal) async {
+  Future<dynamic> addShippingAddress(
+    String address,
+    String state,
+    String city,
+  ) async {
     try {
       final response = await post(add_shoping_address_url, {
-        "address_line1": address,
-        "city": city,
+        "address": address,
+        "localGovt": city,
         "state": state,
-        "country": country,
-        "mobile": mobile,
-        "postal_code": postal,
       });
 
       if (response.status.hasError) {
-        throw Exception(response.statusText);
+        throw Exception("Network Error");
       } else {
         return response.body;
       }
     } catch (e) {
-      Get.snackbar("Server error", e.toString());
+      Get.snackbar("Server error", "Server error");
     }
   }
 

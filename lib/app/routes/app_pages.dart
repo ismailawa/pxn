@@ -10,6 +10,8 @@ import 'package:pxn_mobile/app/modules/carby/bindings/carby_binding.dart';
 import 'package:pxn_mobile/app/modules/carby/views/carby_view.dart';
 import 'package:pxn_mobile/app/modules/cart/bindings/cart_binding.dart';
 import 'package:pxn_mobile/app/modules/cart/views/cart_view.dart';
+import 'package:pxn_mobile/app/modules/checkout/bindings/checkout_binding.dart';
+import 'package:pxn_mobile/app/modules/checkout/views/checkout_view.dart';
 import 'package:pxn_mobile/app/modules/customBottomSheet/bindings/custom_bottom_sheet_binding.dart';
 import 'package:pxn_mobile/app/modules/customBottomSheet/views/custom_bottom_sheet_view.dart';
 import 'package:pxn_mobile/app/modules/dashboard/bindings/dashboard_binding.dart';
@@ -39,6 +41,8 @@ import 'package:pxn_mobile/app/modules/profile/bindings/profile_binding.dart';
 import 'package:pxn_mobile/app/modules/profile/views/profile_view.dart';
 import 'package:pxn_mobile/app/modules/registration/bindings/registration_binding.dart';
 import 'package:pxn_mobile/app/modules/registration/views/registration_view.dart';
+import 'package:pxn_mobile/app/modules/review/bindings/review_binding.dart';
+import 'package:pxn_mobile/app/modules/review/views/review_view.dart';
 import 'package:pxn_mobile/app/modules/services/bindings/services_binding.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
 import 'package:pxn_mobile/app/modules/settings/bindings/settings_binding.dart';
@@ -64,7 +68,6 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
-      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.REGISTRATION,
@@ -80,7 +83,7 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => OnboardingView(),
       binding: OnboardingBinding(),
-      middlewares: [AuthMiddleware()],
+      // middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.DASHBOARD,
@@ -192,6 +195,17 @@ class AppPages {
       name: _Paths.ORDERS,
       page: () => OrdersView(),
       binding: OrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECKOUT,
+      page: () => CheckoutView(),
+      binding: CheckoutBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: _Paths.REVIEW,
+      page: () => ReviewView(),
+      binding: ReviewBinding(),
     ),
   ];
 }

@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
 import 'package:pxn_mobile/app/modules/cart/providers/cart_provider.dart';
 
 class AddShippingAddressController extends GetxController {
   final GlobalKey<FormState> addressFormKey = GlobalKey<FormState>();
   CartProvider cartProvider = Get.put(CartProvider());
+  AuthProvider authProvider = Get.put(AuthProvider());
+  final localStorage = GetStorage();
 
   RxBool isLoading = RxBool(false);
   TextEditingController addressCtrl;
-  TextEditingController cityCtrl;
-  TextEditingController stateCtrl;
-  TextEditingController mobileCtrl;
-  TextEditingController portalCodeCtrl;
-  TextEditingController countryCtrl;
+
+  String selectedState;
+  String selectedLGA;
+
   @override
   void onInit() {
     super.onInit();
     addressCtrl = TextEditingController();
-    cityCtrl = TextEditingController();
-    stateCtrl = TextEditingController();
-    countryCtrl = TextEditingController();
-    mobileCtrl = TextEditingController();
-    portalCodeCtrl = TextEditingController();
   }
 
   @override
@@ -41,19 +39,14 @@ class AddShippingAddressController extends GetxController {
       try {
         isLoading(true);
         final result = await cartProvider.addShippingAddress(
-            addressCtrl.text,
-            cityCtrl.text,
-            stateCtrl.text,
-            countryCtrl.text,
-            mobileCtrl.text,
-            portalCodeCtrl.text);
+          addressCtrl.text,
+          selectedState,
+          selectedLGA,
+        );
         isLoading(false);
-        addressCtrl.dispose();
-        cityCtrl.clear();
-        stateCtrl.clear();
-        mobileCtrl.clear();
-        portalCodeCtrl.clear();
-        countryCtrl.clear();
+        final userData = await authProvider.loginWithToken();
+        await localStorage.write('user', userData['user']);
+        Get.back();
         Get.snackbar("Success", "Adding Shipping Address was successful");
       } catch (e) {
         Get.snackbar("Fial", "Adding Shipping Address Failed");
@@ -67,10 +60,5 @@ class AddShippingAddressController extends GetxController {
   @override
   void onClose() {
     addressCtrl.dispose();
-    cityCtrl.dispose();
-    stateCtrl.dispose();
-    mobileCtrl.dispose();
-    portalCodeCtrl.dispose();
-    countryCtrl.dispose();
   }
 }

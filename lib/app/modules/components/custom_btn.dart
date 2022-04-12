@@ -22,7 +22,7 @@ class CustomBtn extends StatelessWidget {
           style: kButtonStyle,
         ),
         hoverColor: kPrimaryLabelColor,
-        fillColor: Color(0xFF1D83AE),
+        fillColor: Colors.redAccent,
         constraints: BoxConstraints(
           minWidth: double.maxFinite,
           minHeight: 45,

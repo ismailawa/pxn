@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 
 import 'package:pxn_mobile/app/modules/components/custom_nav_bar.dart';
+import 'package:pxn_mobile/app/modules/components/sections_header.dart';
 import 'package:pxn_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:pxn_mobile/app/modules/ecommerce/views/ecommerce_view.dart';
+import 'package:pxn_mobile/app/modules/electricity/views/electricity_view.dart';
 import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/profile/views/profile_view.dart';
 import 'package:pxn_mobile/app/modules/services/views/services_view.dart';
@@ -33,13 +36,13 @@ class _DashboardViewState extends State<DashboardView> {
           selectedLabel = label;
         });
         break;
-      case "trans":
+      case "shop":
         setState(() {
           selectedPage = 1;
           selectedLabel = label;
         });
         break;
-      case "services":
+      case "orders":
         setState(() {
           selectedPage = 2;
           selectedLabel = label;
@@ -60,8 +63,8 @@ class _DashboardViewState extends State<DashboardView> {
 
   List<Widget> pages = <Widget>[
     HomeView(),
-    TransactionsView(),
-    ServicesView(),
+    EcommerceView(),
+    ElectricityView(),
     ProfileView()
   ];
 
@@ -75,7 +78,21 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedPage],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            pages[selectedPage],
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: HeaderSection(
+                onTap: () {
+                  _setSelectedPage("profile");
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: CustomNavBar(
         onSelected: (label) {
           _setSelectedPage(label);

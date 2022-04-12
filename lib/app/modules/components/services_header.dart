@@ -15,24 +15,29 @@ class ServicesHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(
         left: 16,
         right: 16,
         top: 16,
       ),
-      child: Container(
-        child: Row(
-          children: [
-            BackButton(),
-            Text(
-              title,
-              style: kLargeTitleStyle,
+      color: Colors.white,
+      child: Row(
+        children: [
+          BackButton(
+            color: Colors.redAccent,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.redAccent,
             ),
-            Spacer(),
-            child != null ? child : SizedBox.shrink(),
-          ],
-        ),
+          ),
+          Spacer(),
+          child != null ? child : SizedBox.shrink(),
+        ],
       ),
     );
   }

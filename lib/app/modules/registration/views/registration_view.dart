@@ -69,22 +69,10 @@ class RegistrationView extends GetView<RegistrationController> {
                           ),
                           Divider(),
                           CustomInput(
-                            controller: controller.firstNameCtrl,
+                            controller: controller.fullNameCtrl,
                             validator: controller.validateFirstName,
                             icon: Icons.person,
-                            hint: "First Name",
-                          ),
-                          CustomInput(
-                            controller: controller.lastNameCtrl,
-                            validator: controller.validateLastName,
-                            icon: Icons.person,
-                            hint: "Last Name",
-                          ),
-                          CustomInput(
-                            controller: controller.usernameCtrl,
-                            validator: controller.validateUsername,
-                            icon: Icons.person,
-                            hint: "Username",
+                            hint: "Full Name",
                           ),
                           CustomInput(
                             controller: controller.phoneCtrl,

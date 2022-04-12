@@ -8,7 +8,7 @@ class LoginController extends GetxController {
   AuthProvider authProvider = Get.find<AuthProvider>();
   final localStorage = GetStorage();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  TextEditingController username;
+  TextEditingController email;
   TextEditingController password;
   RxBool isSubmited = false.obs;
   RxBool togglePassword = false.obs;
@@ -16,7 +16,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    username = TextEditingController();
+    email = TextEditingController();
     password = TextEditingController();
   }
 
@@ -36,15 +36,15 @@ class LoginController extends GetxController {
       isSubmited(true);
       loadingView("Authenticating");
 
-      final result = await authProvider.login(username.text, password.text);
+      final result = await authProvider.login(email.text, password.text);
       print(result);
       await localStorage.write("isLogin", true);
-      await localStorage.write('user', result['data']);
-      await localStorage.write('token', result['data']['token']);
+      await localStorage.write('user', result['user']);
+      await localStorage.write('token', result['token']);
       Get.back();
       Get.snackbar("Login", "You have sucessfully login");
       Future.delayed(Duration(seconds: 3), () {
-        Get.offAndToNamed('/dashboard');
+        Get.offAndToNamed('/checkout');
         isSubmited(false);
       });
     } catch (e) {
@@ -55,7 +55,7 @@ class LoginController extends GetxController {
 
   String validateUsername(String value) {
     if (value.isEmpty) {
-      return 'Username is required';
+      return 'email is required';
     }
     return null;
   }
@@ -69,7 +69,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    username.dispose();
+    email.dispose();
     password.dispose();
   }
 }

@@ -39,9 +39,8 @@ class OnboardingView extends GetView<OnboardingController> {
                             Container(
                               height: MediaQuery.of(context).size.height * 0.4,
                               width: MediaQuery.of(context).size.height * 0.4,
-                              child: SvgPicture.asset(
+                              child: Image.asset(
                                 pages[index].imageUrl,
-                                semanticsLabel: pages[index].title,
                               ),
                             ),
                             Text(
@@ -53,7 +52,7 @@ class OnboardingView extends GetView<OnboardingController> {
                               height: 16,
                             ),
                             Text(
-                              'Something About the product image display here.Something About the product image display here.Something About the product image display here.',
+                              pages[index].subtitle,
                               style: kSubtitleStyle,
                               textAlign: TextAlign.center,
                             )
@@ -62,19 +61,33 @@ class OnboardingView extends GetView<OnboardingController> {
                       }),
                 ),
               ),
-              OnboardingIndicator(
-                count: pages.length,
-                ontap: () {
-                  if (controller.initialPage.value < pages.length) {
-                    controller.pageController.value.animateToPage(
-                        controller
-                            .initialPage(controller.initialPage.value + 1),
-                        duration: Duration(microseconds: 500),
-                        curve: Curves.easeIn);
-                  }
-                },
-                page: controller.initialPage.value,
-              )
+              controller.initialPage.value < pages.length - 1
+                  ? OnboardingIndicator(
+                      count: pages.length,
+                      ontap: () {
+                        if (controller.initialPage.value < pages.length) {
+                          controller.pageController.value.animateToPage(
+                              controller.initialPage(
+                                  controller.initialPage.value + 1),
+                              duration: Duration(microseconds: 500),
+                              curve: Curves.easeIn);
+                        }
+                      },
+                      page: controller.initialPage.value,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(bottom: 50),
+                      child: MaterialButton(
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          Get.offNamed('/dashboard');
+                        },
+                        child: Text(
+                          'GET STARTED',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
             ],
           ),
         ),
@@ -108,7 +121,7 @@ class OnboardingIndicator extends StatelessWidget {
               height: 90,
               width: 90,
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(pxnSecondaryColor),
+                valueColor: AlwaysStoppedAnimation(Colors.redAccent),
                 value: (page + 1) / (count),
               ),
             ),
@@ -121,7 +134,7 @@ class OnboardingIndicator extends StatelessWidget {
                 height: 65,
                 width: 65,
                 decoration: BoxDecoration(
-                  color: pxnSecondaryColor,
+                  color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Icon(
@@ -167,7 +180,7 @@ class OnboardingHeader extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {
-                Get.offNamed('/login');
+                Get.offNamed('/dashboard');
               },
               child: Text(
                 'Skip',

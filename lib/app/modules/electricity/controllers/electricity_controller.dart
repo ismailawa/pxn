@@ -1,28 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pxn_mobile/app/data/providers/auth_provider.dart';
-import 'package:pxn_mobile/app/data/providers/utilities_provider.dart';
-import 'package:pxn_mobile/app/modules/dataBundle/provider_model.dart';
-import 'package:pxn_mobile/utils/helpers.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:pxn_mobile/app/data/providers/general_provider.dart';
 
 class ElectricityController extends GetxController {
-  UtilitiesProvider utilitiesProvider = Get.put(UtilitiesProvider());
-  AuthProvider authProvider = Get.find<AuthProvider>();
-  GlobalKey<FormState> dataFormState = GlobalKey<FormState>();
+  GeneralProvider generalProvider = Get.find<GeneralProvider>();
 
-  RxList<ProviderModel> providers = RxList<ProviderModel>([]);
-  // RxList<DataBundle> bundles = RxList<DataBundle>([]);
-  Rx<ProviderModel> selectProvider = Rx<ProviderModel>(null);
-  Rx<dynamic> accountNumber = Rx<dynamic>(null);
-  Rx<Map<String, dynamic>> verifiedAccount = Rx<Map<String, dynamic>>(null);
-  TextEditingController accountCtrl = TextEditingController();
-  TextEditingController phoneCtrl = TextEditingController();
-  TextEditingController amountCtrl = TextEditingController();
+  final storage = GetStorage();
+
+  dynamic orders = [];
 
   @override
   void onInit() {
     super.onInit();
-    getProviders();
+    orders = storage.read("orders") != null ? storage.read("orders") : [];
+    storage.listenKey("orders", (order) {
+      orders = order;
+      update();
+    });
+    getOrders();
   }
 
   @override
@@ -30,71 +25,15 @@ class ElectricityController extends GetxController {
     super.onReady();
   }
 
-  Future<void> getProviders() async {
+  Future<void> getOrders() async {
     try {
-      final result = await this.utilitiesProvider.getElectricityProvider();
+      final result = await this.generalProvider.getOrders();
 
-      if (result["status"] == 'success') {
-        print((result["data"]["providers"]));
-        providers(
-            ProviderModel.providersModelParser(result["data"]["providers"]));
+      if (result['success']) {
+        await storage.write("orders", result['data']);
       } else {
         Get.back();
         Get.snackbar("Get providers", result.message);
-      }
-    } catch (e) {
-      print(e);
-      Get.back();
-      Get.snackbar("Login Error ", "Login failed $e");
-    }
-  }
-
-  Future<void> verifyClientAccount() async {
-    try {
-      loadingView("Processing...");
-      final result = await this.utilitiesProvider.verifyElectricityAccount({
-        "service_type": selectProvider.value.serviceType,
-        "account_number": accountCtrl.text
-      });
-
-      if (result["status"] == 'success') {
-        Get.back();
-        print((result["data"]));
-        verifiedAccount(result["data"]["user"]);
-      } else {
-        Get.back();
-        Get.snackbar("Verifying account", result.message);
-      }
-    } catch (e) {
-      print(e);
-      Get.back();
-      Get.snackbar("Login Error ", "Login failed $e");
-    }
-  }
-
-  Future<void> purchaseElectricity() async {
-    try {
-      loadingView("Processing...");
-      final result = await this.utilitiesProvider.purchaceElectricity({
-        "service_type": selectProvider.value.serviceType,
-        "account_number": accountCtrl.text,
-        "amount": double.parse(amountCtrl.text),
-        "phone": phoneCtrl.text,
-        "name": selectProvider.value.name,
-      });
-
-      if (result["status"] == 'success') {
-        Get.back();
-        print((result["data"]));
-        Get.toNamed("/success", arguments: {
-          "message": result["message"],
-          "status": true,
-          "title": "Congratulation",
-          "image": "assets/images/green-check.json"
-        });
-      } else {
-        Get.back();
-        Get.snackbar("Purchase issue", result["message"]);
       }
     } catch (e) {
       print(e);

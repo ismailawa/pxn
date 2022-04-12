@@ -50,12 +50,12 @@ class CustomInput extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(40),
               borderSide: BorderSide(
-                color: Color(0xFF1D83AE),
+                color: Colors.redAccent,
                 width: 2,
               )),
           prefixIcon: Icon(
             icon,
-            color: Color(0xFF1D83AE),
+            color: Colors.redAccent,
           ),
           suffixIcon: !isTogglePassword && !isPassword
               ? null
@@ -66,7 +66,7 @@ class CustomInput extends StatelessWidget {
                       },
                       child: Icon(
                         Icons.visibility,
-                        color: Color(0xFF1D83AE),
+                        color: Colors.redAccent,
                       ),
                     )
                   : InkWell(
@@ -75,7 +75,7 @@ class CustomInput extends StatelessWidget {
                       },
                       child: Icon(
                         Icons.visibility_off,
-                        color: Color(0xFF1D83AE),
+                        color: Colors.redAccent,
                       ),
                     ),
           isDense: true,

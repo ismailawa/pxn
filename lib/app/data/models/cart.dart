@@ -16,4 +16,7 @@ class Cart {
         cartTotal: json['cartTotal'],
         items: Item.categoriesModelParser(json['items']),
       );
+
+  static List<Cart> categoriesModelParser(dynamic response) =>
+      response.map<Cart>((json) => Cart.fromJson(json)).toList();
 }

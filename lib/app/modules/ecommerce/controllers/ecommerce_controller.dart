@@ -18,7 +18,6 @@ class EcommerceController extends GetxController {
   void onInit() {
     super.onInit();
     localStorage.listenKey("cartCount", (u) {
-      print(u);
       cartCount(u);
     });
 

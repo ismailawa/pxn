@@ -24,12 +24,13 @@ class NavBtn extends StatelessWidget {
                 height: 40,
                 width: 120,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(colors: [
-                    Colors.pink.withOpacity(0.9),
-                    Colors.blueAccent,
-                  ]),
-                ),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.redAccent
+                    // gradient: LinearGradient(colors: [
+                    //   Colors.pink.withOpacity(0.9),
+                    //   Colors.blueAccent,
+                    // ]),
+                    ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

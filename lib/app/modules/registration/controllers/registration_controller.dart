@@ -12,9 +12,7 @@ class RegistrationController extends GetxController {
   GlobalKey<FormState> registrationFormkey = GlobalKey<FormState>();
 
   // Public properties
-  TextEditingController firstNameCtrl;
-  TextEditingController lastNameCtrl;
-  TextEditingController usernameCtrl;
+  TextEditingController fullNameCtrl;
   TextEditingController phoneCtrl;
   TextEditingController emailCtrl;
   TextEditingController passwordCtrl;
@@ -24,9 +22,7 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    firstNameCtrl = TextEditingController();
-    lastNameCtrl = TextEditingController();
-    usernameCtrl = TextEditingController();
+    fullNameCtrl = TextEditingController();
     phoneCtrl = TextEditingController();
     emailCtrl = TextEditingController();
     passwordCtrl = TextEditingController();
@@ -46,13 +42,11 @@ class RegistrationController extends GetxController {
     }
 
     final user = UserRegDto(
-        firstname: firstNameCtrl.text,
-        lastname: lastNameCtrl.text,
-        username: usernameCtrl.text,
-        phone: phoneCtrl.text,
-        email: emailCtrl.text,
-        password: passwordCtrl.text,
-        role: 'user');
+      fullname: fullNameCtrl.text,
+      phone: phoneCtrl.text,
+      email: emailCtrl.text,
+      password: passwordCtrl.text,
+    );
 
     try {
       Get.defaultDialog(
@@ -66,11 +60,9 @@ class RegistrationController extends GetxController {
           ));
       await authProvider.register(user);
       Get.back();
-      Get.snackbar("Registration",
-          "You have sucessfully Register Token has been send to your email");
+      Get.snackbar("Registration", "You have sucessfully Register");
       Future.delayed(Duration(seconds: 3), () {
-        Get.offAndToNamed('/verification',
-            arguments: {'username': user.username});
+        Get.back();
       });
     } catch (error) {
       Get.back();
@@ -122,9 +114,7 @@ class RegistrationController extends GetxController {
 
   @override
   void onClose() {
-    firstNameCtrl.dispose();
-    lastNameCtrl.dispose();
-    usernameCtrl.dispose();
+    fullNameCtrl.dispose();
     phoneCtrl.dispose();
     emailCtrl.dispose();
     passwordCtrl.dispose();

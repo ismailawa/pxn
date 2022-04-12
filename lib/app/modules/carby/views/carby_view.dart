@@ -287,105 +287,41 @@ class TopLine extends StatelessWidget {
 
 class SearchBar extends StatelessWidget {
   final String hint;
-  final Function search;
+  final Function(dynamic) search;
 
   const SearchBar({
     Key key,
-    this.hint = "Where to?",
+    this.hint = "seach",
     this.search,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return FloatingSearchBar(
-    //   hint: 'Search...',
-    //   scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-    //   transitionDuration: const Duration(milliseconds: 800),
-    //   transitionCurve: Curves.easeInOut,
-    //   physics: const BouncingScrollPhysics(),
-    //   axisAlignment: -1.0,
-    //   openAxisAlignment: 0.0,
-    //   width: 500,
-    //   debounceDelay: const Duration(milliseconds: 500),
-    //   onQueryChanged: (query) {
-    //     // Call your model, bloc, controller here.
-    //   },
-    //   // Specify a custom transition to be used for
-    //   // animating between opened and closed stated.
-    //   transition: CircularFloatingSearchBarTransition(),
-    //   actions: [
-    //     FloatingSearchBarAction(
-    //       showIfOpened: false,
-    //       child: CircularButton(
-    //         icon: const Icon(Icons.place),
-    //         onPressed: () {},
-    //       ),
-    //     ),
-    //     FloatingSearchBarAction.searchToClear(
-    //       showIfClosed: false,
-    //     ),
-    //   ],
-    //   builder: (context, transition) {
-    //     return ClipRRect(
-    //       borderRadius: BorderRadius.circular(8),
-    //       child: Material(
-    //         color: Colors.white,
-    //         elevation: 4.0,
-    //         child: Column(
-    //           mainAxisSize: MainAxisSize.min,
-    //           children: Colors.accents.map((color) {
-    //             return Container(height: 112, color: color);
-    //           }).toList(),
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
     return Ink(
-      child: InkWell(
-        onTap: search,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 10,
-            left: 15,
-            right: 15,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 10,
+          left: 15,
+          right: 15,
+        ),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.blue.shade200.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: Container(
-            height: 50,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.blue.shade200.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue.shade200.withOpacity(0.5),
-                    ),
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    hint,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: hint,
+              prefixIcon: Icon(Icons.search),
+              hintStyle: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 16,
               ),
+              border: InputBorder.none,
             ),
+            onChanged: search,
           ),
         ),
       ),

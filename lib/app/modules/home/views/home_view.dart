@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:pxn_mobile/app/data/models/category.dart';
+import 'package:pxn_mobile/app/data/models/product.dart';
 import 'package:pxn_mobile/app/modules/components/custom_input.dart';
-import 'package:pxn_mobile/app/modules/components/sections_header.dart';
 import 'package:pxn_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:pxn_mobile/app/modules/home/components/services_list_section.dart';
-import 'package:pxn_mobile/app/modules/home/components/shimmer_loading.dart';
-import 'package:pxn_mobile/app/modules/home/components/transaction_list_section.dart';
-import 'package:pxn_mobile/app/modules/home/components/wallet_card.dart';
 import 'package:pxn_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:pxn_mobile/utils/constants.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeView extends StatelessWidget {
   final List<GlobalKey> globalkeys;
   final controller = Get.put(HomeController());
+  final dashboardController = Get.find<DashboardController>();
+  final pageController = PageController(initialPage: 0);
 
   HomeView({Key key, this.globalkeys}) : super(key: key);
 
@@ -22,52 +23,497 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue.shade100.withOpacity(0.3),
-      body: Obx(
-        () => SafeArea(
-          child: controller.user.value == null
-              ? LoadingContainer(controller: controller)
-              : SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  child: Stack(
+                    children: [
+                      PageView(
+                        controller: pageController,
                         children: [
-                          HeaderSection(),
-                          SizedBox(
-                            height: 20,
+                          Image.asset("assets/images/slider.jpg",
+                              fit: BoxFit.cover),
+                          Image.asset("assets/images/slider1.jpeg",
+                              fit: BoxFit.cover),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 100),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                pageController.animateToPage(
+                                  0,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              child: Icon(
+                                Icons.arrow_back_ios_new,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                pageController.animateToPage(
+                                  1,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Category",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Container(
+                      height: 180,
+                      width: MediaQuery.of(context).size.width,
+                      child: Obx(
+                        () => dashboardController.categories.value.length != 0
+                            ? ListView(
+                                padding: const EdgeInsets.all(10),
+                                scrollDirection: Axis.horizontal,
+                                children: List.generate(
+                                    dashboardController
+                                            .categories.value.length +
+                                        1, (index) {
+                                  if (index == 0) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Ink(
+                                          child: InkWell(
+                                        onTap: () {
+                                          dashboardController
+                                              .filterByCategory('all');
+                                        },
+                                        child: Container(
+                                          height: 150,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: (dashboardController
+                                                        .selectedCategory.value
+                                                        .toLowerCase()
+                                                        .compareTo("all") ==
+                                                    0)
+                                                ? []
+                                                : [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 5,
+                                                      blurRadius: 7,
+                                                      offset: Offset(0,
+                                                          3), // changes position of shadow
+                                                    ),
+                                                  ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(10),
+                                                      topRight:
+                                                          Radius.circular(10),
+                                                    ),
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/images/slider.jpg"),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(
+                                                  "All",
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: (dashboardController
+                                                                  .selectedCategory
+                                                                  .value
+                                                                  .toLowerCase()
+                                                                  .compareTo(
+                                                                      "all") ==
+                                                              0)
+                                                          ? Colors.redAccent
+                                                          : Colors.black),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                    );
+                                  } else {
+                                    return CategoryCard(
+                                      isActive: dashboardController
+                                              .categories.value[index - 1].name
+                                              .toLowerCase() ==
+                                          dashboardController
+                                              .selectedCategory.value,
+                                      dashboardController: dashboardController,
+                                      category: dashboardController
+                                          .categories.value[index - 1],
+                                    );
+                                  }
+                                }),
+                              )
+                            : ListView(
+                                padding: const EdgeInsets.all(10),
+                                scrollDirection: Axis.horizontal,
+                                children: List.generate(
+                                  3,
+                                  (index) => Shimmer.fromColors(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Container(
+                                        height: 150,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                    baseColor: Colors.grey,
+                                    highlightColor: Colors.white,
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Products",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Obx(
+                      () => dashboardController.products.value.length != 0
+                          ? Column(
+                              children: List.generate(
+                                dashboardController.filterProducts.value.length,
+                                (index) => ProductsCard(
+                                    dashboardController: dashboardController,
+                                    product: dashboardController
+                                        .filterProducts.value[index]),
+                              ),
+                            )
+                          : Column(
+                              children: List.generate(
+                                  4,
+                                  (index) => Shimmer.fromColors(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 10),
+                                        child: Container(
+                                          height: 250,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                                      baseColor: Colors.white,
+                                      highlightColor: Colors.grey))),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  final DashboardController dashboardController;
+  final bool isActive;
+
+  const CategoryCard({
+    Key key,
+    this.category,
+    this.dashboardController,
+    this.isActive = false,
+  }) : super(key: key);
+
+  final Category category;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Ink(
+        child: InkWell(
+          onTap: () {
+            dashboardController.filterByCategory(category.name.toLowerCase());
+          },
+          child: Container(
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: !isActive
+                  ? [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ]
+                  : [],
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage(
+                            "assets/images/${category.name.toLowerCase()}.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    category.name,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: isActive ? Colors.redAccent : Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProductsCard extends StatelessWidget {
+  final DashboardController dashboardController;
+  const ProductsCard({
+    Key key,
+    this.product,
+    this.dashboardController,
+  }) : super(key: key);
+  final Product product;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: GestureDetector(
+        onTap: () => dashboardController.viewProductDetails(product, context),
+        child: Container(
+            height: 250,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      constraints: BoxConstraints(minHeight: 250),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(color: Colors.grey.shade300),
+                      ),
+                      child: Image.network(
+                        product.images[0],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          WalletCard(
-                            user: controller.user.value,
-                            topupWallet: () {
-                              controller.openPaymentDialog(context);
-                            },
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              product.description,
+                              style: TextStyle(fontSize: 14),
+                            ),
                           ),
-                          SizedBox(
-                            height: 20,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  " ₦ ${product.price}",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                product.comparePrice.length != 0
+                                    ? Text(
+                                        " ₦ ${product.comparePrice[0]}",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            decoration:
+                                                TextDecoration.lineThrough),
+                                      )
+                                    : SizedBox.shrink(),
+                              ],
+                            ),
                           ),
-                          Label(
-                            title: "Services",
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: RatingBarIndicator(
+                              rating: 5,
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                            ),
                           ),
-                          ServiceListSection(),
-                          Label(
-                            title: "Recent Transactions",
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                              height: 30,
+                              width: MediaQuery.of(context).size.width,
+                              child: MaterialButton(
+                                onPressed: () =>
+                                    Get.toNamed('review', arguments: product),
+                                color: Colors.blueAccent,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.reviews,
+                                        color: Colors.white, size: 20),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Reviews",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                          SizedBox(
-                            height: 20,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 30,
+                              width: MediaQuery.of(context).size.width,
+                              child: MaterialButton(
+                                onPressed: () => dashboardController
+                                    .addProductToCart(product),
+                                color: Colors.redAccent,
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.shopping_cart,
+                                        color: Colors.white, size: 20),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Add to Cart",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                          TransactionListSection(
-                            transactions: controller.user.value.transactions,
-                            controller: controller,
-                          )
                         ],
                       ),
                     ),
                   ),
                 ),
-        ),
+              ],
+            )),
       ),
     );
   }

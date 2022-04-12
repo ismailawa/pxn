@@ -22,7 +22,9 @@ class LoginView extends GetView<LoginController> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                 ),
-                Logo(),
+                Logo(
+                  size: 100,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                   child: Container(
@@ -61,9 +63,9 @@ class LoginView extends GetView<LoginController> {
                           Divider(),
                           CustomInput(
                             validator: controller.validatePassword,
-                            icon: Icons.person,
-                            hint: "username",
-                            controller: controller.username,
+                            icon: Icons.mail,
+                            hint: "email",
+                            controller: controller.email,
                           ),
                           CustomInput(
                             validator: controller.validatePassword,

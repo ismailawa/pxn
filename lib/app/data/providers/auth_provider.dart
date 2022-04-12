@@ -9,6 +9,7 @@ class AuthProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = base_url;
+    setTokenHeader();
   }
 
   setTokenHeader() {
@@ -16,15 +17,25 @@ class AuthProvider extends GetConnect {
     if (token != null) {
       // It's will attach 'apikey' property on header from all requests
       httpClient.addRequestModifier((request) {
-        request.headers['x-access-token'] = token;
+        request.headers['Authorization'] = "Bearer $token";
         return request;
       });
     }
   }
 
-  Future<dynamic> login(String username, String password) async {
+  Future<dynamic> login(String email, String password) async {
     final Response response =
-        await post(login_url, {"username": username, "password": password});
+        await post(login_url, {"email": email, "password": password});
+    if (response.status.hasError) {
+      throw Exception(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+
+  Future<dynamic> loginWithToken() async {
+    setTokenHeader();
+    final Response response = await get(login_url);
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {
@@ -42,12 +53,23 @@ class AuthProvider extends GetConnect {
   }
 
   Future<void> getUserProfile() async {
-    setTokenHeader();
-    final Response response = await get(user_profile_url);
+    final Response response = await get(login_url);
     if (response.status.hasError) {
       throw Exception(response.statusText);
     } else {
-      await localStorage.write('profile', response.body['data']);
+      await localStorage.write('user', response.body['user']);
+    }
+  }
+
+  Future<dynamic> logout() async {
+    try {
+      await localStorage.write('isLogin', false);
+      await localStorage.write('user', null);
+      await localStorage.write('token', null);
+      Get.offAndToNamed('/dashboard');
+      Get.snackbar("Logout", "You have sucessfully logout");
+    } catch (e) {
+      Get.snackbar("Logout Error ", "Logout failed $e");
     }
   }
 

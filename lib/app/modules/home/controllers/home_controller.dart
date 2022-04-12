@@ -9,7 +9,6 @@ import 'package:pxn_mobile/app/data/providers/payment_provider.dart';
 import 'package:pxn_mobile/app/modules/home/views/home_view.dart';
 import 'package:pxn_mobile/app/modules/login/user_model.dart';
 import 'package:pxn_mobile/utils/helpers.dart';
-import 'package:rave_flutter/rave_flutter.dart';
 
 class HomeController extends GetxController {
   PaymentProvider paymentProvider = Get.put(PaymentProvider());
@@ -26,11 +25,11 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     amountCtrl = TextEditingController();
-    localStorage.listenKey("profile", (u) {
-      print(u);
-      User decodedUser = User.fromJson(u);
-      user(decodedUser);
-    });
+    // localStorage.listenKey("user", (u) {
+    //   print(u);
+    //   User decodedUser = User.fromJson(u);
+    //   user(decodedUser);
+    // });
     getCurrentUser();
   }
 
@@ -52,42 +51,42 @@ class HomeController extends GetxController {
 
   makePayment(BuildContext context) async {
     // Form validation
-    final isValid = amountFormkey.currentState.validate();
+    // final isValid = amountFormkey.currentState.validate();
 
-    if (!isValid) {
-      return;
-    }
-    try {
-      loadingView("Processing...");
-      final result = await paymentProvider.initialisePayment(amountCtrl.text);
-      if (result['success']) {
-        amountCtrl.clear();
-        Get.back();
-        final initialRes = FlutterWaveInitResponseModel.fromJson(
-            result as Map<String, dynamic>);
-        RaveResult res = await processPayment(
-            context: context,
-            txRef: initialRes.data.txtRef,
-            publicKey: initialRes.data.flwpubk,
-            encryptionKey: initialRes.data.flwenckey,
-            amount: initialRes.data.amount.toDouble(),
-            email: user.value.email,
-            firstName: user.value.firstname,
-            lastName: user.value.lastname,
-            narration: "Wallet funding");
+    // if (!isValid) {
+    //   return;
+    // }
+    // try {
+    //   loadingView("Processing...");
+    //   final result = await paymentProvider.initialisePayment(amountCtrl.text);
+    //   if (result['success']) {
+    //     amountCtrl.clear();
+    //     Get.back();
+    //     final initialRes = FlutterWaveInitResponseModel.fromJson(
+    //         result as Map<String, dynamic>);
+    //     RaveResult res = await processPayment(
+    //         context: context,
+    //         txRef: initialRes.data.txtRef,
+    //         publicKey: initialRes.data.flwpubk,
+    //         encryptionKey: initialRes.data.flwenckey,
+    //         amount: initialRes.data.amount.toDouble(),
+    //         email: user.value.email,
+    //         firstName: user.value.firstname,
+    //         lastName: user.value.lastname,
+    //         narration: "Wallet funding");
 
-        final confirmationRes = await paymentProvider.confirmPayment(
-            initialRes.data.txtRef, res.rawResponse['data']['id']);
-        if (confirmationRes['success']) {
-          Get.back();
-          await getCurrentUser();
-        }
-      }
-    } catch (e) {
-      print(e);
-      Get.back();
-      Get.snackbar("Payment Error ", "Wallet funding failed $e");
-    }
+    //     final confirmationRes = await paymentProvider.confirmPayment(
+    //         initialRes.data.txtRef, res.rawResponse['data']['id']);
+    //     if (confirmationRes['success']) {
+    //       Get.back();
+    //       await getCurrentUser();
+    //     }
+    //   }
+    // } catch (e) {
+    //   print(e);
+    //   Get.back();
+    //   Get.snackbar("Payment Error ", "Wallet funding failed $e");
+    // }
   }
 
   @override
@@ -99,7 +98,7 @@ class HomeController extends GetxController {
     try {
       await authProvider.getUserProfile();
     } catch (e) {
-      Get.snackbar("Profile Error ", "Fetching Profile failed $e");
+      Get.snackbar("Profile Error ", "Fetching Profile failed");
     }
   }
 
@@ -110,47 +109,47 @@ class HomeController extends GetxController {
     return null;
   }
 
-  Future<RaveResult> processPayment({
-    BuildContext context,
-    String publicKey,
-    String encryptionKey,
-    double amount,
-    String email,
-    String firstName,
-    String lastName,
-    String narration,
-    String txRef,
-  }) async {
-    // Get a reference to RavePayInitializer
-    var initializer = RavePayInitializer(
-        amount: amount, publicKey: publicKey, encryptionKey: encryptionKey)
-      ..country = "NG"
-      ..currency = "NGN"
-      ..email = email
-      ..fName = firstName
-      ..lName = lastName
-      ..narration = narration ?? ''
-      ..txRef = txRef
-      // ..acceptMpesaPayments = true
-      ..acceptAccountPayments = true
-      ..acceptCardPayments = true
-      // ..acceptAchPayments = true
-      // ..acceptGHMobileMoneyPayments = true
-      // ..acceptUgMobileMoneyPayments = true
-      ..staging = true
-      ..displayFee = true;
+  // Future<RaveResult> processPayment({
+  //   BuildContext context,
+  //   String publicKey,
+  //   String encryptionKey,
+  //   double amount,
+  //   String email,
+  //   String firstName,
+  //   String lastName,
+  //   String narration,
+  //   String txRef,
+  // }) async {
+  //   // Get a reference to RavePayInitializer
+  //   var initializer = RavePayInitializer(
+  //       amount: amount, publicKey: publicKey, encryptionKey: encryptionKey)
+  //     ..country = "NG"
+  //     ..currency = "NGN"
+  //     ..email = email
+  //     ..fName = firstName
+  //     ..lName = lastName
+  //     ..narration = narration ?? ''
+  //     ..txRef = txRef
+  //     // ..acceptMpesaPayments = true
+  //     ..acceptAccountPayments = true
+  //     ..acceptCardPayments = true
+  //     // ..acceptAchPayments = true
+  //     // ..acceptGHMobileMoneyPayments = true
+  //     // ..acceptUgMobileMoneyPayments = true
+  //     ..staging = true
+  //     ..displayFee = true;
 
-    // Initialize and get the transaction result
-    RaveResult response = await RavePayManager()
-        .prompt(context: context, initializer: initializer);
-    return response;
-  }
+  //   // Initialize and get the transaction result
+  //   RaveResult response = await RavePayManager()
+  //       .prompt(context: context, initializer: initializer);
+  //   return response;
+  // }
 
-  showTransactionDetails() {
-    Get.bottomSheet(
-      TransactionDetails(),
-    );
-  }
+  // showTransactionDetails() {
+  //   Get.bottomSheet(
+  //     TransactionDetails(),
+  //   );
+  // }
 
   @override
   void onClose() {

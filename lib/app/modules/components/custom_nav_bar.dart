@@ -38,16 +38,16 @@ class CustomNavBar extends StatelessWidget {
                 onSelected: onSelected,
               ),
               NavBtn(
-                icon: Icons.business,
-                label: "Trans",
-                isSelected: selectedLabel.toLowerCase().compareTo("trans") == 0,
+                icon: Icons.shopping_cart,
+                label: "Shop",
+                isSelected: selectedLabel.toLowerCase().compareTo("shop") == 0,
                 onSelected: onSelected,
               ),
               NavBtn(
-                icon: Icons.room_service,
-                label: "Services",
+                icon: Icons.business,
+                label: "Orders",
                 isSelected:
-                    selectedLabel.toLowerCase().compareTo("services") == 0,
+                    selectedLabel.toLowerCase().compareTo("orders") == 0,
                 onSelected: onSelected,
               ),
               NavBtn(

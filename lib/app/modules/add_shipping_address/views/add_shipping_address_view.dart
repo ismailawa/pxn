@@ -12,11 +12,12 @@ class AddShippingAddressView extends GetView<AddShippingAddressController> {
       appBar: AppBar(
         title: Text('Add Shipping Address',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.redAccent,
+              fontWeight: FontWeight.bold,
             )),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.redAccent),
         centerTitle: true,
       ),
       body: Form(
@@ -33,35 +34,130 @@ class AddShippingAddressView extends GetView<AddShippingAddressController> {
                   icon: Icons.location_city,
                   hint: "Shipping Address",
                 ),
-                CustomInput(
-                  controller: controller.cityCtrl,
-                  validator: controller.validateNotEmpty,
-                  icon: Icons.location_city,
-                  hint: "City",
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    bottom: 15,
+                  ),
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.location_city,
+                        color: Colors.redAccent,
+                      ),
+                      hintText: "Select State",
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    ),
+                    items: [
+                      DropdownMenuItem(
+                        value: "Plateau",
+                        child: Text('Plateau'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Bauchi",
+                        child: Text('Bauchi'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Abuja",
+                        child: Text('Abuja'),
+                      )
+                    ],
+                    onChanged: (value) {
+                      controller.selectedState = value;
+                    },
+                  ),
                 ),
-                CustomInput(
-                  controller: controller.stateCtrl,
-                  validator: controller.validateNotEmpty,
-                  icon: Icons.location_city,
-                  hint: "State",
-                ),
-                CustomInput(
-                  controller: controller.countryCtrl,
-                  validator: controller.validateNotEmpty,
-                  icon: Icons.location_city,
-                  hint: "Country",
-                ),
-                CustomInput(
-                  controller: controller.mobileCtrl,
-                  validator: controller.validateNotEmpty,
-                  icon: Icons.location_city,
-                  hint: "Mobile",
-                ),
-                CustomInput(
-                  controller: controller.portalCodeCtrl,
-                  validator: controller.validateNotEmpty,
-                  icon: Icons.location_city,
-                  hint: "Postal Code",
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: DropdownButtonFormField(
+                    onChanged: (value) {
+                      controller.selectedLGA = value;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Select LGA",
+                      prefixIcon: Icon(
+                        Icons.location_city,
+                        color: Colors.redAccent,
+                      ),
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    ),
+                    items: [
+                      DropdownMenuItem(
+                        value: "Barkin Ladi",
+                        child: Text('Barkin Ladi'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Bassa",
+                        child: Text('Bassa'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Bokkos",
+                        child: Text('Bokkos'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Jos-East",
+                        child: Text('Jos-East'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Jos-North",
+                        child: Text('Jos-North'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Jos-South",
+                        child: Text('Jos-South'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Kanam",
+                        child: Text('Kanam'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Kanke",
+                        child: Text('Kanke'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Langtang North",
+                        child: Text('Langtang North'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Langtang South",
+                        child: Text("Langtang South"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Mangu",
+                        child: Text('Mangu'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Mikang",
+                        child: Text('Mikang'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Pankshin",
+                        child: Text('Pankshin'),
+                      ),
+                      DropdownMenuItem(
+                        value: "Qua'an Pan",
+                        child: Text("Qua'an Pan"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Riyom",
+                        child: Text("Riyom"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Shendam",
+                        child: Text("Shendam"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Wase",
+                        child: Text("Wase"),
+                      ),
+                    ],
+                  ),
                 ),
                 Obx(
                   () => Padding(
@@ -70,7 +166,7 @@ class AddShippingAddressView extends GetView<AddShippingAddressController> {
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: MaterialButton(
-                        color: Colors.blueGrey,
+                        color: Colors.redAccent,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                         onPressed: () {

@@ -3,9 +3,13 @@ import 'package:get/get.dart';
 import 'package:pxn_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class HeaderSection extends StatelessWidget {
-  final dbController = Get.put(DashboardController());
+  final dashboardController =
+      Get.put<DashboardController>(DashboardController());
+  final VoidCallback onTap;
+
   HeaderSection({
     Key key,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -14,15 +18,45 @@ class HeaderSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          CircleAvatar(
-            child: Icon(Icons.person),
+          GestureDetector(
+            onTap: onTap,
+            child: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
           ),
           Spacer(),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Get.toNamed('/settings');
-            },
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(Icons.shopping_cart, color: Colors.redAccent),
+                onPressed: () {
+                  Get.toNamed('/settings');
+                },
+              ),
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Obx(
+                    () => Center(
+                      child: Text(
+                        "${dashboardController.cartCount.value}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),

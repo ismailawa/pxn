@@ -22,7 +22,7 @@ class TransactionListSection extends StatelessWidget {
           (index) => TransactionCard(
             transaction: transactions[index],
             onTap: () {
-              controller.showTransactionDetails();
+              // controller.showTransactionDetails();
             },
           ),
         ),

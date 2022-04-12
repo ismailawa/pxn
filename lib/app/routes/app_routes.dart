@@ -29,6 +29,8 @@ abstract class Routes {
   static const SUCCESS = _Paths.SUCCESS;
   static const ADD_SHIPPING_ADDRESS = _Paths.ADD_SHIPPING_ADDRESS;
   static const ORDERS = _Paths.ORDERS;
+  static const CHECKOUT = _Paths.CHECKOUT;
+  static const REVIEW = _Paths.REVIEW;
 }
 
 abstract class _Paths {
@@ -59,4 +61,6 @@ abstract class _Paths {
   static const SUCCESS = '/success';
   static const ADD_SHIPPING_ADDRESS = '/add-shipping-address';
   static const ORDERS = '/orders';
+  static const CHECKOUT = '/checkout';
+  static const REVIEW = '/review';
 }

@@ -6,8 +6,12 @@ class AuthMiddleware extends GetMiddleware {
   final localStorage = GetStorage();
   @override
   redirect(String route) {
-   return localStorage.read('isLogin') == null
-        ? null
-        : RouteSettings(name: '/dashboard');
+    return localStorage.read('isLogin') != null
+        ? localStorage.read('isLogin')
+            ? localStorage.read('user')['addAddress'].length > 0
+                ? null
+                : RouteSettings(name: '/add-shipping-address')
+            : RouteSettings(name: '/login')
+        : RouteSettings(name: '/login');
   }
 }

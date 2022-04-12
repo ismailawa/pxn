@@ -1,150 +1,275 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pxn_mobile/app/modules/components/custom_btn.dart';
-import 'package:pxn_mobile/app/modules/components/custom_dropdown.dart';
-import 'package:pxn_mobile/app/modules/components/custom_input.dart';
-import 'package:pxn_mobile/utils/constants.dart';
-
 import '../controllers/electricity_controller.dart';
 
 // ignore: must_be_immutable
 class ElectricityView extends GetView<ElectricityController> {
-  var ctrl = Get.put(ElectricityController());
+  ElectricityController electricityController =
+      Get.put(ElectricityController());
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
+    return Container(
+      color: Colors.blue.shade100.withOpacity(0.3),
+      child: Scaffold(
+        backgroundColor: Colors.blue.shade100.withOpacity(0.3),
+        body: GetBuilder<ElectricityController>(
+          builder: (newController) => newController.orders.length > 0
+              ? SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(vertical: 80, horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(
+                        electricityController.orders.length,
+                        (index) => OrderCard(
+                              order: electricityController.orders[index],
+                            )),
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(top: 150),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      Icon(
+                        Icons.shopping_cart,
+                        size: 100,
+                        color: Colors.redAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "You Dont have orders yet",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  )),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class OrderCard extends StatelessWidget {
+  final dynamic order;
+  const OrderCard({
+    Key key,
+    this.order,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Container(
+        padding: EdgeInsets.all(10),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.8,
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            )),
-        child: ctrl.providers.value.length < 1
-            ? Container(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(
-                    backgroundColor: pxnPrimaryColor,
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(2)),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Orders",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        "#${order['orderNumber']}",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              )
-            : SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Electricity",
-                            style: kLargeTitleStyle,
-                          ),
-                          Divider(
-                            color: Colors.black38,
-                            endIndent: MediaQuery.of(context).size.width * 0.6,
-                          )
-                        ],
+                    Text(
+                      "Order Placed:",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Form(
-                          child: Column(
-                        children: [
-                          CustomDropDown(
-                            hint: "Select Provider",
-                            displayValue: "shortname",
-                            billers: controller.providers.value,
-                            selectedBiller: controller.selectProvider.value,
-                            onChanged: (value) {
-                              controller.selectProvider(value);
-
-                              // controller.getDataBundles(
-                              //     (value as ProviderModel).shortname);
-                            },
-                          ),
-                          CustomInput(
-                            icon: Icons.account_box,
-                            hint: "Enter Account Number",
-                            inputType: TextInputType.number,
-                            controller: controller.accountCtrl,
-                          ),
-                          CustomBtn(
-                            label: "Verify",
-                            onPress: () {
-                              controller.verifyClientAccount();
-                            },
-                          ),
-                          controller.verifiedAccount.value == null
-                              ? SizedBox.shrink()
-                              : Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20),
-                                      child: Container(
-                                          height: 100,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border: Border.all(
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "${controller.verifiedAccount.value["name"]}",
-                                              ),
-                                              Text(
-                                                "${controller.verifiedAccount.value["address"]}",
-                                              ),
-                                              Text(
-                                                "${controller.verifiedAccount.value["accountNumber"]}",
-                                              ),
-                                              Text(
-                                                "${controller.verifiedAccount.value["rawOutput"]["accessCode"]}",
-                                              ),
-                                              Text(
-                                                "${controller.verifiedAccount.value["rawOutput"]["tariffRate"]}",
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                    CustomInput(
-                                      icon: Icons.phone,
-                                      hint: "Enter phone",
-                                      controller: controller.phoneCtrl,
-                                    ),
-                                    CustomInput(
-                                      controller: controller.amountCtrl,
-                                      icon: Icons.money,
-                                      hint: "Enter Amount",
-                                    ),
-                                    CustomBtn(
-                                      label: "Buy",
-                                      onPress: () {
-                                        controller.purchaseElectricity();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                        ],
-                      )),
-                    )
+                    Text(
+                      "${order['createdAt'].split('T')[0].split('-')[2]}th ${[
+                        'Jan',
+                        'Feb',
+                        'Mar',
+                        'Apr',
+                        'May',
+                        'Jun',
+                        'Jul',
+                        'Aug',
+                        'Sept',
+                        'Oct',
+                        'Nov',
+                        'Dec'
+                      ][int.parse(order['createdAt'].split('T')[0].split('-')[1]) - 1]} ${order['createdAt'].split('T')[0].split('-')[0]}",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.black,
+                      ),
+                    ),
                   ],
                 ),
+              ],
+            ),
+            Divider(
+              thickness: 2,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Column(
+                children: List.generate(
+              order['items'].length,
+              (index) => OrderList(
+                item: order['items'][index],
+                status: order['status'],
               ),
+            )),
+            Divider(
+              thickness: 2,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total:",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                Text(
+                  " ₦ ${order['total']}",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class OrderList extends StatelessWidget {
+  final dynamic item;
+  final dynamic status;
+  const OrderList({
+    Key key,
+    this.item,
+    this.status,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            child: Image.network(
+              item['productImage'],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item['name'],
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Qty:${item['quantity']}",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    " ₦ ${item['price']}",
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Status",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "$status",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

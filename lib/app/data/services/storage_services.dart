@@ -21,4 +21,8 @@ class StorageServices extends GetxService {
       return false;
     }
   }
+
+  dynamic getStorage(String key) {
+    return localStorage.read(key);
+  }
 }

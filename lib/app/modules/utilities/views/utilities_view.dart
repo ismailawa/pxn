@@ -35,9 +35,6 @@ class UtilitiesView extends GetView<UtilitiesController> {
                     ),
                     SearchBar(
                       hint: "Search product",
-                      search: () {
-                        showSearch(context: context, delegate: SearchProduct());
-                      },
                     ),
                     Label(
                       title: "Products",

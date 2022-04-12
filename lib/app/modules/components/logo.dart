@@ -4,7 +4,7 @@ class Logo extends StatelessWidget {
   final double size;
   const Logo({
     Key key,
-    this.size = 80.0,
+    this.size = 100.0,
   }) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class Logo extends StatelessWidget {
       width: size,
       child: Image.asset(
         'assets/images/logo.png',
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
       ),
     );
   }
