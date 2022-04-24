@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:pxn_mobile/app/modules/add_shipping_address/bindings/add_shipping_address_binding.dart';
 import 'package:pxn_mobile/app/modules/add_shipping_address/views/add_shipping_address_view.dart';
+import 'package:pxn_mobile/app/modules/address-list/bindings/address_list_binding.dart';
+import 'package:pxn_mobile/app/modules/address-list/views/address_list_view.dart';
 import 'package:pxn_mobile/app/modules/airtime/bindings/airtime_binding.dart';
 import 'package:pxn_mobile/app/modules/airtime/views/airtime_view.dart';
 import 'package:pxn_mobile/app/modules/cable/bindings/cable_binding.dart';
@@ -206,6 +208,11 @@ class AppPages {
       name: _Paths.REVIEW,
       page: () => ReviewView(),
       binding: ReviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADDRESS_LIST,
+      page: () => AddressListView(),
+      binding: AddressListBinding(),
     ),
   ];
 }

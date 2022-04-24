@@ -11,7 +11,7 @@ class CheckoutController extends GetxController {
   dynamic cartList;
   dynamic user;
   int amount = 0;
-  int charges = 1000;
+  int charges = 0;
   int total = 0;
 
   @override
@@ -33,8 +33,9 @@ class CheckoutController extends GetxController {
       amount = cartList
           .map((a) => a['product']['price'] * a['quantity'])
           .reduce((a, b) => a + b);
-      charges += (100 *
-          (cartList.map((a) => a['quantity']).reduce((a, b) => a + b) - 1));
+      // charges += (100 *
+      //     (cartList.map((a) => a['quantity']).reduce((a, b) => a + b) - 1));
+      charges = 0;
       total = amount + charges;
     }
   }
@@ -90,7 +91,7 @@ class CheckoutController extends GetxController {
     final Flutterwave flutterwave = Flutterwave(
       context: context,
       style: style,
-      publicKey: "FLWPUBK_TEST-fec06fba1aff936607a6b7b34b0589f9-X",
+      publicKey: "FLWPUBK-62aaf934af3c1f5cbb84c1652b28b259-X",
       currency: "NGN",
       txRef: txRefId,
       meta: {"email": user['email'], "orderNumber": txRefId},
@@ -100,7 +101,7 @@ class CheckoutController extends GetxController {
       paymentOptions: "ussd, card, barter, payattitude",
       customization:
           Customization(title: "Payment for the purchase of Nasco products"),
-      isTestMode: true,
+      isTestMode: false,
     );
 
     try {

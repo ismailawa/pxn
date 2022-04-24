@@ -61,7 +61,7 @@ class CheckoutView extends GetView<CheckoutController> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  newController.cartList.length > 0
+                                  newController.cartList != null
                                       ? Column(
                                           children: List.generate(
                                             newController.cartList.length,

@@ -50,6 +50,9 @@ class GeneralProvider extends GetConnect {
   }
 
   Future<dynamic> viewCart(dynamic payload) async {
+    final token = localStorage.read('token').toString();
+    print(token);
+
     final Response response = await post(
         "$add_to_cart_url${payload.id}", {"productQuantity": payload.quantity});
     if (response.status.hasError) {

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -5,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pxn_mobile/app/data/models/category.dart';
 import 'package:pxn_mobile/app/data/models/product.dart';
 import 'package:pxn_mobile/app/data/providers/general_provider.dart';
+import 'package:intl/intl.dart';
 
 class DashboardController extends GetxController {
   final localStorage = GetStorage();
@@ -189,11 +193,15 @@ class DashboardController extends GetxController {
         isScrollControlled: true);
   }
 
-  void viewProductDetails(Product product, BuildContext context) {
+  void viewProductDetails(Product product, BuildContext context,
+      {List<Product> products}) {
+
+    final formatCurrency =
+        NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
     Get.bottomSheet(
         Padding(
           padding: const EdgeInsets.only(
-            top: 50,
+            top: 30,
           ),
           child: Container(
               width: MediaQuery.of(context).size.width,
@@ -204,108 +212,171 @@ class DashboardController extends GetxController {
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10)),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text("Drag",
-                        style: TextStyle(fontSize: 20, color: Colors.black)),
-                    Icon(Icons.arrow_downward_sharp, size: 40),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 400,
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(color: Colors.grey.shade300),
-                        ),
-                        child: Image.network(
-                          product.images[0],
-                          fit: BoxFit.contain,
-                        ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 400,
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Color(0xC0C0C0C5),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(color: Colors.grey.shade300),
+                      ),
+                      child: Image.network(
+                        product.images[0],
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                          ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 10, right: 10),
-                                child: Text(
-                                  product.name,
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 10, right: 10),
-                                child: Text(
-                                  product.description,
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      " ₦ ${product.price}",
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, left: 10, right: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    product.name,
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.red),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    child: RatingBarIndicator(
+                                      rating: 5,
+                                      itemCount: 5,
+                                      itemSize: 16.0,
+                                      physics: BouncingScrollPhysics(),
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
                                     ),
-                                    product.comparePrice.length > 0
-                                        ? Text(
-                                            " ₦ ${product.comparePrice[0]}",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                decoration:
-                                                    TextDecoration.lineThrough),
-                                          )
-                                        : SizedBox.shrink(),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, left: 10, right: 10, bottom: 5),
+                              child: Text(
+                                product.description,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: List.generate(
+                                      products.length,
+                                      (index) => Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 6),
+                                            child: products[index]
+                                                            .images
+                                                            .length >
+                                                        0 &&
+                                                    products[index]
+                                                            .category
+                                                            .name
+                                                            .toLowerCase()
+                                                            .compareTo(product
+                                                                .category.name
+                                                                .toLowerCase()) ==
+                                                        0
+                                                ? GestureDetector(
+                                                    onTap: () async {
+                                                      Get.back();
+                                                      viewProductDetails(products[index], context,
+                                                          products: products);
+                                                    },
+                                                    child: Container(
+                                                      width: 100,
+                                                      height: 100,
+                                                      decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                              fit: BoxFit.fill,
+                                                              image: NetworkImage(
+                                                                  products[index]
+                                                                          .images[
+                                                                      0])),
+                                                          color: Colors
+                                                              .grey.shade300,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                    ),
+                                                  )
+                                                : SizedBox.shrink(),
+                                          )),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 10, bottom: 10, right: 10),
-                                child: RatingBarIndicator(
-                                  rating: 5,
-                                  itemCount: 5,
-                                  itemSize: 20.0,
-                                  physics: BouncingScrollPhysics(),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${formatCurrency.format(product.price)}",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      product.comparePrice.length > 0
+                                          ? Text(
+                                              " ₦ ${product.comparePrice[0]}",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  decoration: TextDecoration
+                                                      .lineThrough),
+                                            )
+                                          : SizedBox.shrink(),
+                                    ],
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 30,
-                                  width: MediaQuery.of(context).size.width,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
                                   child: MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     onPressed: () => addProductToCart(product),
                                     color: Colors.redAccent,
                                     child: Row(
@@ -322,14 +393,14 @@ class DashboardController extends GetxController {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )),
         ),
         isScrollControlled: true);

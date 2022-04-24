@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pxn_mobile/app/data/models/category.dart';
 import 'package:pxn_mobile/app/data/models/product.dart';
 import 'package:pxn_mobile/app/modules/components/custom_input.dart';
@@ -241,10 +244,11 @@ class HomeView extends StatelessWidget {
                           ? Column(
                               children: List.generate(
                                 dashboardController.filterProducts.value.length,
-                                (index) => ProductsCard(
+                                (index) => dashboardController
+                                    .filterProducts.value[index].images.length > 0 ?ProductsCard(
                                     dashboardController: dashboardController,
                                     product: dashboardController
-                                        .filterProducts.value[index]),
+                                        .filterProducts.value[index], products: dashboardController.products): SizedBox(),
                               ),
                             )
                           : Column(
@@ -355,18 +359,22 @@ class CategoryCard extends StatelessWidget {
 
 class ProductsCard extends StatelessWidget {
   final DashboardController dashboardController;
-  const ProductsCard({
+  var formatCurrency = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
+
+ ProductsCard({
     Key key,
     this.product,
+    this.products,
     this.dashboardController,
   }) : super(key: key);
   final Product product;
+  final List<Product> products;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: GestureDetector(
-        onTap: () => dashboardController.viewProductDetails(product, context),
+        onTap: () => dashboardController.viewProductDetails(product, context, products: products),
         child: Container(
             height: 250,
             width: MediaQuery.of(context).size.width,
@@ -429,9 +437,10 @@ class ProductsCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  " ₦ ${product.price}",
+                                  "${formatCurrency.format(product.price)}",
                                   style: TextStyle(
                                       fontSize: 12,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 product.comparePrice.length != 0
@@ -466,6 +475,7 @@ class ProductsCard extends StatelessWidget {
                               height: 30,
                               width: MediaQuery.of(context).size.width,
                               child: MaterialButton(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 onPressed: () =>
                                     Get.toNamed('review', arguments: product),
                                 color: Colors.blueAccent,
@@ -490,6 +500,7 @@ class ProductsCard extends StatelessWidget {
                               height: 30,
                               width: MediaQuery.of(context).size.width,
                               child: MaterialButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 onPressed: () => dashboardController
                                     .addProductToCart(product),
                                 color: Colors.redAccent,

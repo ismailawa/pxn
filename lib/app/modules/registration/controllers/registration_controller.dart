@@ -41,11 +41,16 @@ class RegistrationController extends GetxController {
       return;
     }
 
+    if(fullNameCtrl.text.split(" ").length < 2) {
+      Get.snackbar('Full Name', "Please full name is required");
+      return;
+    }
+
     final user = UserRegDto(
-      fullname: fullNameCtrl.text,
-      phone: phoneCtrl.text,
-      email: emailCtrl.text,
-      password: passwordCtrl.text,
+      fullname: fullNameCtrl.text.trim(),
+      phone: phoneCtrl.text.trim(),
+      email: emailCtrl.text.trim(),
+      password: passwordCtrl.text.trim(),
     );
 
     try {

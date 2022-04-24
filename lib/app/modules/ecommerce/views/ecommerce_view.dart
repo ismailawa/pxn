@@ -109,13 +109,14 @@ class EcomGridViewSection extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.4,
+            childAspectRatio: 0.5,
           ),
           itemBuilder: (context, index) {
-            return GridProductsCard(
+            return  products[index].images.length > 0 ?GridProductsCard(
               product: products[index],
               dashboardController: dashboardController,
-            );
+              products: products,
+            ): SizedBox();
           }),
     );
   }
@@ -124,9 +125,11 @@ class EcomGridViewSection extends StatelessWidget {
 class GridProductsCard extends StatelessWidget {
   final DashboardController dashboardController;
   final Product product;
+  final List<Product> products;
   const GridProductsCard({
     Key key,
     this.product,
+    this.products,
     this.dashboardController,
   }) : super(key: key);
 
@@ -135,7 +138,7 @@ class GridProductsCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: GestureDetector(
-        onTap: () => dashboardController.viewProductDetails(product, context),
+        onTap: () => dashboardController.viewProductDetails(product, context, products: products ),
         child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -182,7 +185,7 @@ class GridProductsCard extends StatelessWidget {
                           Text(
                             product.name,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -190,7 +193,7 @@ class GridProductsCard extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
                               product.description,
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(fontSize: 8),
                             ),
                           ),
                           Padding(
@@ -236,6 +239,7 @@ class GridProductsCard extends StatelessWidget {
                               height: 30,
                               width: MediaQuery.of(context).size.width,
                               child: MaterialButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 onPressed: () => dashboardController
                                     .addProductToCart(product),
                                 color: Colors.blueAccent,
@@ -259,6 +263,7 @@ class GridProductsCard extends StatelessWidget {
                               height: 30,
                               width: MediaQuery.of(context).size.width,
                               child: MaterialButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 onPressed: () => dashboardController
                                     .addProductToCart(product),
                                 color: Colors.redAccent,
