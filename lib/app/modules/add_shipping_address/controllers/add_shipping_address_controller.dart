@@ -35,13 +35,18 @@ class AddShippingAddressController extends GetxController {
   }
 
   Future<void> submitShippingAddress() async {
+    if(selectedState.trim().toLowerCase().compareTo('plateau') != 0){
+      Get.snackbar("Location", "Sorry our services are available only in plateau state.");
+      return;
+    }
+
     if (addressFormKey.currentState.validate()) {
       try {
         isLoading(true);
         final result = await cartProvider.addShippingAddress(
-          addressCtrl.text,
-          selectedState,
-          selectedLGA,
+          addressCtrl.text.trim(),
+          selectedState.trim(),
+          selectedLGA.trim(),
         );
         isLoading(false);
         final userData = await authProvider.loginWithToken();
@@ -49,7 +54,7 @@ class AddShippingAddressController extends GetxController {
         Get.back();
         Get.snackbar("Success", "Adding Shipping Address was successful");
       } catch (e) {
-        Get.snackbar("Fial", "Adding Shipping Address Failed");
+        Get.snackbar("Failure", "Adding Shipping Address Failed");
         isLoading(false);
       }
     }

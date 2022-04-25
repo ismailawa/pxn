@@ -42,7 +42,7 @@ class CustomInput extends StatelessWidget {
         controller: controller,
         keyboardType: inputType,
         style: kSearchTextStyle,
-        obscureText: isPassword && isTogglePassword,
+        obscureText: isPassword,
         obscuringCharacter: '*',
         decoration: InputDecoration(
           hintText: hint,

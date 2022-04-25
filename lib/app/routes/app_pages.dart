@@ -34,6 +34,7 @@ import 'package:pxn_mobile/app/modules/login/bindings/login_binding.dart';
 import 'package:pxn_mobile/app/modules/login/middlewares/auth_middleware.dart';
 import 'package:pxn_mobile/app/modules/login/views/login_view.dart';
 import 'package:pxn_mobile/app/modules/onboarding/bindings/onboarding_binding.dart';
+import 'package:pxn_mobile/app/modules/onboarding/middlewares/InitialMiddleware.dart';
 import 'package:pxn_mobile/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:pxn_mobile/app/modules/orders/bindings/orders_binding.dart';
 import 'package:pxn_mobile/app/modules/orders/views/orders_view.dart';
@@ -85,7 +86,7 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => OnboardingView(),
       binding: OnboardingBinding(),
-      // middlewares: [AuthMiddleware()],
+       middlewares: [InitialMiddleware()],
     ),
     GetPage(
       name: _Paths.DASHBOARD,

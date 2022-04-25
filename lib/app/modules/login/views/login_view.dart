@@ -70,6 +70,7 @@ class LoginView extends GetView<LoginController> {
                           CustomInput(
                             validator: controller.validatePassword,
                             icon: Icons.lock,
+                            isPassword: true,
                             hint: "Password",
                             controller: controller.password,
                           ),

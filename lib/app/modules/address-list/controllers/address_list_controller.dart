@@ -1,12 +1,18 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class AddressListController extends GetxController {
-  //TODO: Implement AddressListController
+  final localStorage = GetStorage();
+  dynamic user;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    user = localStorage.read("user");
+    localStorage.listenKey("user", (u) {
+      user = u;
+      update();
+    });
   }
 
   @override
@@ -16,5 +22,4 @@ class AddressListController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

@@ -376,7 +376,7 @@ class ProductsCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => dashboardController.viewProductDetails(product, context, products: products),
         child: Container(
-            height: 250,
+            height: 200,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -469,31 +469,31 @@ class ProductsCard extends StatelessWidget {
                             ),
                           ),
                           Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Container(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width,
-                              child: MaterialButton(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                onPressed: () =>
-                                    Get.toNamed('review', arguments: product),
-                                color: Colors.blueAccent,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.reviews,
-                                        color: Colors.white, size: 20),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      "Reviews",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                          //   child: Container(
+                          //     height: 30,
+                          //     width: MediaQuery.of(context).size.width,
+                          //     child: MaterialButton(
+                          //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          //       onPressed: () =>
+                          //           Get.toNamed('review', arguments: product),
+                          //       color: Colors.blueAccent,
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Icon(Icons.reviews,
+                          //               color: Colors.white, size: 20),
+                          //           SizedBox(width: 5),
+                          //           Text(
+                          //             "Reviews",
+                          //             style: TextStyle(color: Colors.white),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(

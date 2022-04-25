@@ -16,6 +16,10 @@ class OnboardingView extends GetView<OnboardingController> {
           body: Column(
             children: [
               OnboardingHeader(
+                onPress: ()async{
+                  await controller.storage.write("initial", false);
+                  Get.offNamed('/dashboard');
+                },
                 onTap: () {
                   if (controller.initialPage.value > 0) {
                     controller.pageController.value.animateToPage(
@@ -79,7 +83,8 @@ class OnboardingView extends GetView<OnboardingController> {
                       padding: const EdgeInsets.only(bottom: 50),
                       child: MaterialButton(
                         color: Colors.redAccent,
-                        onPressed: () {
+                        onPressed: () async{
+                          await controller.storage.write("initial", false);
                           Get.offNamed('/dashboard');
                         },
                         child: Text(
@@ -152,9 +157,11 @@ class OnboardingIndicator extends StatelessWidget {
 
 class OnboardingHeader extends StatelessWidget {
   final Function onTap;
+  final Function onPress;
   const OnboardingHeader({
     Key key,
     this.onTap,
+    this.onPress,
   }) : super(key: key);
 
   @override
@@ -179,9 +186,7 @@ class OnboardingHeader extends StatelessWidget {
             ),
           ),
           TextButton(
-              onPressed: () {
-                Get.offNamed('/dashboard');
-              },
+              onPressed:onPress,
               child: Text(
                 'Skip',
                 style: TextStyle(

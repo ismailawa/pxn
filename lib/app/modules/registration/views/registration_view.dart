@@ -89,6 +89,7 @@ class RegistrationView extends GetView<RegistrationController> {
                           CustomInput(
                             controller: controller.passwordCtrl,
                             validator: controller.validatePassword,
+                            isPassword: true,
                             icon: Icons.lock,
                             hint: "Password",
                           ),

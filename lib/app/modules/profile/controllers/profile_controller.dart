@@ -18,6 +18,7 @@ class ProfileController extends GetxController {
     cartList = localStorage.read("cart");
     user = localStorage.read("user");
     print(user);
+
     localStorage.listenKey("cart", (u) {
       cartList = u;
       update();

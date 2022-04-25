@@ -109,7 +109,7 @@ class EcomGridViewSection extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.5,
+            childAspectRatio: 0.65,
           ),
           itemBuilder: (context, index) {
             return  products[index].images.length > 0 ?GridProductsCard(
@@ -153,7 +153,7 @@ class GridProductsCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      width: 300,
+                      width: 250,
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -232,31 +232,31 @@ class GridProductsCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
-                            child: Container(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width,
-                              child: MaterialButton(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                onPressed: () => dashboardController
-                                    .addProductToCart(product),
-                                color: Colors.blueAccent,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.reviews,
-                                        color: Colors.white, size: 20),
-                                    Text(
-                                      "Reviews",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(
+                          //       horizontal: 10, vertical: 4),
+                          //   child: Container(
+                          //     height: 30,
+                          //     width: MediaQuery.of(context).size.width,
+                          //     child: MaterialButton(
+                          //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          //       onPressed: () => dashboardController
+                          //           .addProductToCart(product),
+                          //       color: Colors.blueAccent,
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Icon(Icons.reviews,
+                          //               color: Colors.white, size: 20),
+                          //           Text(
+                          //             "Reviews",
+                          //             style: TextStyle(color: Colors.white),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(

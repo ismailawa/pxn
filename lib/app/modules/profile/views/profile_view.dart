@@ -74,14 +74,15 @@ class ProfileView extends GetView<ProfileController> {
                             //   thickness: 2,
                             // ),
                             ProfileBtn(
-                              icon: Icons.subscriptions,
-                              label: "Shipping Address",
-                              onTap: () => Get.toNamed("/add-shipping-address"),
-                            ),
-                            Divider(
-                              color: Colors.blue.shade100.withOpacity(0.3),
-                              thickness: 2,
-                            ),
+                                icon: Icons.subscriptions,
+                                label: "Shipping Address",
+                                onTap: () {
+                                  if (profileController.user['addAddress'].isEmpty) {
+                                    Get.toNamed("/add-shipping-address");
+                                  } else {
+                                    Get.toNamed('/address-list');
+                                  }
+                                }),
                             Divider(
                               color: Colors.blue.shade100.withOpacity(0.3),
                               thickness: 2,
